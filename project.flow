@@ -1,0 +1,68 @@
+{
+    luxe: {
+        window: {
+            width: 1280,
+            height: 720,
+            title: 'Fargerfight Arque',
+            fullscreen: false,
+            resizable: true,
+            borderless: false
+        }
+    },
+
+ 	project : {
+		name : 'Fargerfight Arque',
+		version : '0.0.1',
+		author : 'Aureoline Tetrahedron',
+
+        app : {
+    		name : 'FargerfightArque',
+    		package : 'com.junongx.fargerfight.arque',
+    		main : 'Main',
+            mobile: {
+                orientation: 'landscape',
+                android: {
+                    sdk_min: '12',
+                    sdk_target: '19'
+                }
+            },
+            icon : "icons => flow"
+        },
+
+        build : {
+            number: 1,
+
+            "comment" : "flow build android --d android_release",
+            dependencies : {
+                luxe : '*',
+            },
+            files: {
+                keystore_things : 'passwords.sensitive.properties => project/passwords.sensitive.properties'
+            },
+        },
+
+        files : {
+            config : 'config.json',
+            assets : 'assets/',
+            comments: "index : { path:'custom_index.html => index.html', template:'project', not_listed: true }",
+        }
+    },
+
+    if: {
+        android_release: {
+            app: {
+                mobile: {
+                    android: {
+                        build_type: "release",
+                        keystore_path: "indiedev.keystore",
+                        keystore_alias: "indiedev"
+                    }
+                }
+            },
+
+            build: {
+                defines: ['no_debug_console']
+            }
+        }
+    },
+}
