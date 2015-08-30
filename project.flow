@@ -35,6 +35,7 @@
             "comment" : "flow build android --d android_release",
             dependencies : {
                 luxe : '*',
+                nape : '*'
             },
             files: {
                 keystore_things : 'passwords.sensitive.properties => project/passwords.sensitive.properties'

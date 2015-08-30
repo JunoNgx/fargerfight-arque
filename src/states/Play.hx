@@ -6,39 +6,96 @@ import luxe.Color;
 import luxe.Vector;
 import luxe.Camera;
 
+import nape.geom.Vec2;
+import nape.phys.Body;
+import nape.phys.BodyType;
+import nape.shape.Polygon;
+import nape.shape.Circle;
+import nape.constraint.PivotJoint;
+
+import nape.space.Space;
+
+import luxe.physics.nape.DebugDraw;
+
 import C;
 
 class Play extends State {
 
-	// This is your main gameplay state and should totally be in your control
-	// All callbacks from luxe.Game are also available here
+	public static var drawer: DebugDraw;
+	public static var debugText: luxe.Text;
+	var borders: Body;
 
-	var block: Sprite;
+	var azur: entity.Azur; // Left fighter
 
 	override public function onenter<T> (_:T) {
+		drawer = new DebugDraw();
+		debugText = new luxe.Text({name: 'debug', pos: new Vector(200, 20)});
+        Luxe.physics.nape.debugdraw = drawer;
 
-		block = new Sprite({
-			name: 'default testing sprite',
-			pos: Luxe.screen.mid,
-			color: new Color().rgb(0xf94b04),
-			size: new Vector(128, 128)
-			});
+		setupWorld();
+		spawnPlayers();
+
+	}
+
+	function setupWorld() {
+		// Reset space with no gravity
+		Luxe.physics.nape.space = new Space( new Vec2(0, 0));
+		Luxe.physics.nape.space.worldLinearDrag = 2;
+		Luxe.physics.nape.space.worldAngularDrag = 2.4;
+
+		// Create four boundary walls for gameplay arena
+		borders = new Body ( BodyType.STATIC );
+		borders.shapes.add(new Polygon(Polygon.rect(0, 0, Main.w, -1)));
+		borders.shapes.add(new Polygon(Polygon.rect(0, Main.h, Main.w, 1)));
+		borders.shapes.add(new Polygon(Polygon.rect(0, 0, -1, Main.h)));
+		borders.shapes.add(new Polygon(Polygon.rect(Main.w, 0, 1, Main.h)));
+		borders.space = Luxe.physics.nape.space;
+		drawer.add(borders);
+	}
+
+	function spawnPlayers() {
+
+		azur = new entity.Azur();
+		// Creating and arming Azur
+		// azur = new Body(BodyType.DYNAMIC);
+		// azur.shapes.add(new Polygon(Polygon.box(32, 64)));
+		// azur.position.setxy(Main.w * 0.25, Main.h * 0.5);
+		// azur.space = Luxe.physics.nape.space;
+		// drawer.add(azur);
+
+		// azur.add(new component.LeftTouchControl());
+	}
+
+	function spawnOdeon() {
+
 	}
 
 	override public function update(dt: Float) {
-		block.rotation_z += C.rotate_speed * dt;
+
 	}
 
 	override public function onleave<T> (_:T) {
-		block.destroy();
+
 	}
 
-	override function onmousemove( event: MouseEvent) {
-		block.pos = Luxe.camera.screen_point_to_world(event.pos);
+	override public function onmousemove(e: MouseEvent) {
+
+		// var desRot = Math.atan2(e.yrel * 100, e.xrel * 100);
+		// var desRot = Math.atan2(azur.physic.body.velocity.y, azur.physic.body.velocity.x);
+		// Luxe.draw.text({
+		// 	text: '${desRot}',
+		// 	pos: new Vector(200, 20),
+		// 	point_size: 48,
+		// 	align: right,
+		// 	immediate: true,
+		// });
+
+		// debugText.text = Std.string(desRot);
+		// debugText.text = Std.string(azur.physic.body.angularVel);
+		// debugText.text = Std.string(azur.physic.body.rotation);
 	}
 
 	override function onkeyup( e:KeyEvent ) {
-		//escape from the game at any time, mostly for debugging purpose
 		if(e.keycode == Key.escape) {
 			Luxe.shutdown();
 		}
