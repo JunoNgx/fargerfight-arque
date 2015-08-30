@@ -11,10 +11,10 @@ import component.BaseTouchControl;
 
 import C;
 
-class LeftTouchControl extends BaseTouchControl {
+class RightTouchControl extends BaseTouchControl {
 
 	override public function onmousedown(e: MouseEvent) {
-		if (e.x > Main.w/2) { // ignoring touches on the right side
+		if (e.x < Main.w/2) { // ignoring touches on the left side
 			return;
 		} else super.onmousedown(e);
 	}
