@@ -10,7 +10,11 @@ package;
  // in update(dt: Float );
 class C {
 
-	public static var player_speed: Int = 400;
-	public static var rotate_speed: Int = 40;
+	public static var force_multiplier: Float = 5.5;
+
+	public static var barrel_radius: Float = 54;
+
+	public static var shard_lifetime: Float = 4;
+	public static var shard_speed: Float = 500;
 
 }

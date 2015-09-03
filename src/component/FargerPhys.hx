@@ -11,7 +11,7 @@ import nape.phys.Material;
 import nape.phys.BodyType;
 import nape.shape.Polygon;
 
-class FargerPhysic extends Component {
+class FargerPhys extends Component {
 
 	public var body: Body;
 
@@ -27,6 +27,12 @@ class FargerPhysic extends Component {
 	}
 
 	override public function update(dt: Float) {
-		entity.pos = new Vector( body.position.x, body.position.y);
+		var host: luxe.Visual = cast entity;
+
+		// entity.pos = new Vector( body.position.x, body.position.y);
+		// entity.radians = body.rotation;
+
+		host.pos = new Vector( body.position.x, body.position.y);
+		host.radians = body.rotation;
 	}
 }

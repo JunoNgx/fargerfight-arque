@@ -15,7 +15,7 @@ class Azur extends PlayerBase {
 
 	override public function init() {
 		super.init();
-		physic.body.position.setxy(Main.w * 0.25, Main.h * 0.5);
+		phys.body.position.setxy(Main.w * 0.25, Main.h * 0.5);
 
 		this.add(new component.LeftTouchControl());
 
