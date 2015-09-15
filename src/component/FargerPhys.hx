@@ -20,6 +20,7 @@ class FargerPhys extends Component {
 
 		body = new Body(BodyType.DYNAMIC);
 		body.shapes.add(new Polygon(Polygon.box(32, 64)));
+		// body.shapes.add(new nape.shape.Circle(48));
 		// body.position.setxy(Main.w * 0.25, Main.h * 0.5);
 		body.setShapeMaterials(new Material(0.0, 1.0, 2.0, 1.0, 0.1));
 		body.space = Luxe.physics.nape.space;

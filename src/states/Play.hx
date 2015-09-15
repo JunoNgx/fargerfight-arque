@@ -23,7 +23,9 @@ class Play extends State {
 
 	public static var drawer: DebugDraw;
 	public static var debugText: luxe.Text;
-	var borders: Body;
+	
+	public static var borders: Body;
+	public static var covers: Body;
 
 	var azur: entity.Azur; // Left fighter
 
@@ -51,6 +53,9 @@ class Play extends State {
 		borders.shapes.add(new Polygon(Polygon.rect(Main.w, 0, 1, Main.h)));
 		borders.space = Luxe.physics.nape.space;
 		drawer.add(borders);
+
+		spawnCovers();
+
 	}
 
 	function spawnPlayers() {
@@ -68,6 +73,13 @@ class Play extends State {
 
 	function spawnOdeon() {
 
+	}
+
+	function spawnCovers() {
+		// Objects that act as cover and obstacles that shards will also bounce off from
+		covers = new Body (BodyType.STATIC);
+		covers.space = Luxe.physics.nape.space;
+		drawer.add(covers);
 	}
 
 	override public function update(dt: Float) {

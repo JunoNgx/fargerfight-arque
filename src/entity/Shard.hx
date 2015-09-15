@@ -22,7 +22,10 @@ class Shard extends Visual {
 		super({
 			name: 'shard',
 			name_unique: true,
+			// visible: false,
 		});
+
+		// this.pos = new Vector (300, 300);
 
 		phys = new ShardPhys();
 		this.add(phys);
