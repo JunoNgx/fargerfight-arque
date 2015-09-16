@@ -9,8 +9,8 @@ import nape.geom.Vec2;
 import nape.phys.Body;
 import nape.phys.Material;
 import nape.phys.BodyType;
-import nape.shape.Polygon;
-// import nape.shape.Circle;
+// import nape.shape.Polygon;
+import nape.shape.Circle;
 
 import nape.geom.Geom;
 
@@ -21,18 +21,21 @@ class ShardPhys extends Component {
 	override public function new() {
 		super({name: 'physic'});
 
-		body = new Body(BodyType.KINEMATIC);
-		body.shapes.add(new Polygon(Polygon.regular(24, 24, 3)));
-		// body.shapes.add(new Circle(24));
-		body.position.setxy(500, 500);
-		body.setShapeMaterials(new Material(0.0, 1.0, 2.0, 1.0, 0.1));
+		body = new Body(BodyType.DYNAMIC);
+		// body.shapes.add(new Polygon(Polygon.regular(24, 24, 3)));
+		body.shapes.add(new Circle(24));
+		// body.position.setxy(500, 500);
+		body.setShapeMaterials(new Material(1.0, 0.1, 1, 0.05, 0.1));
 		body.space = Luxe.physics.nape.space;
 		states.Play.drawer.add(body);
 	}
 
 	override public function update(dt: Float) {
 		entity.pos = new Vector( body.position.x, body.position.y);
-		collideWithCovers();
+
+		var host: luxe.Visual = cast entity;
+		host.radians = this.body.rotation;
+		// collideWithCovers();
 	}
 
 	function collideWithCovers() {

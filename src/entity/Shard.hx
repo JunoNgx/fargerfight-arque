@@ -35,10 +35,15 @@ class Shard extends Visual {
 		phys.body.rotation = _radians;
 		this.radians = phys.body.rotation;
 
-		this.phys.body.velocity = new Vec2(
+		this.phys.body.applyImpulse(new Vec2( 
 			C.shard_speed * Math.cos(this.radians),
 			C.shard_speed * Math.sin(this.radians)
-		);
+		));
+
+		// this.phys.body.velocity = new Vec2(
+		// 	C.shard_speed * Math.cos(this.radians),
+		// 	C.shard_speed * Math.sin(this.radians)
+		// );
 	}
 
 	override public function update(dt: Float) {
@@ -48,6 +53,8 @@ class Shard extends Visual {
 			lifetime += dt;
 		} else {
 			// phys.body.space = null;
+			states.Play.drawer.remove(this.phys.body);
+			Luxe.physics.nape.space.bodies.remove(this.phys.body);
 			destroy();
 		} 
 	}

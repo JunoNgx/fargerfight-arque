@@ -23,7 +23,7 @@ class Play extends State {
 
 	public static var drawer: DebugDraw;
 	public static var debugText: luxe.Text;
-	
+
 	public static var borders: Body;
 	public static var covers: Body;
 
@@ -45,12 +45,17 @@ class Play extends State {
 		Luxe.physics.nape.space.worldLinearDrag = 2;
 		Luxe.physics.nape.space.worldAngularDrag = 2.4;
 
+		// nape.Config.linearSleepThreshold = 10;
+
 		// Create four boundary walls for gameplay arena
 		borders = new Body ( BodyType.STATIC );
 		borders.shapes.add(new Polygon(Polygon.rect(0, 0, Main.w, -1)));
 		borders.shapes.add(new Polygon(Polygon.rect(0, Main.h, Main.w, 1)));
 		borders.shapes.add(new Polygon(Polygon.rect(0, 0, -1, Main.h)));
 		borders.shapes.add(new Polygon(Polygon.rect(Main.w, 0, 1, Main.h)));
+
+		// borders.setShapeMaterials(nape.phys.Material.rubber());
+		borders.setShapeMaterials(new nape.phys.Material(1.0, 1.0, 2.0, 1.0, 0.1));
 		borders.space = Luxe.physics.nape.space;
 		drawer.add(borders);
 

@@ -23,6 +23,7 @@ class FargerPhys extends Component {
 		// body.shapes.add(new nape.shape.Circle(48));
 		// body.position.setxy(Main.w * 0.25, Main.h * 0.5);
 		body.setShapeMaterials(new Material(0.0, 1.0, 2.0, 1.0, 0.1));
+		// body.setShapeMaterials(Material.rubber());
 		body.space = Luxe.physics.nape.space;
 		states.Play.drawer.add(body);
 	}
