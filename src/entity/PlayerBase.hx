@@ -28,8 +28,8 @@ class PlayerBase extends Visual {
 
 	override public function update(dt: Float) {
 		
-		barrel.x = this.pos.x + 54 * Math.cos(this.radians + Math.PI * 11/28);
-		barrel.y = this.pos.y + 54 * Math.sin(this.radians + Math.PI * 11/28);
+		barrel.x = this.pos.x + C.barrel_length * Math.cos(this.radians + Math.PI * 11/28);
+		barrel.y = this.pos.y + C.barrel_length * Math.sin(this.radians + Math.PI * 11/28);
 
 		if (this.fire_cooldown < C.fire_cooldown) this.fire_cooldown += dt;
 		

@@ -6,7 +6,7 @@ import luxe.Color;
 import C;
 
 class Azur extends PlayerBase {
-
+	
 	override public function new() {
 		super({
 			name: 'azur',

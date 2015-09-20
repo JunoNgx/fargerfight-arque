@@ -25,8 +25,6 @@ class Shard extends Visual {
 			// visible: false,
 		});
 
-		// this.pos = new Vector (300, 300);
-
 		phys = new ShardPhys();
 		this.add(phys);
 
@@ -39,28 +37,24 @@ class Shard extends Visual {
 			C.shard_speed * Math.cos(this.radians),
 			C.shard_speed * Math.sin(this.radians)
 		));
+	}
 
-		// this.phys.body.velocity = new Vec2(
-		// 	C.shard_speed * Math.cos(this.radians),
-		// 	C.shard_speed * Math.sin(this.radians)
-		// );
+	override public function init() {
+
 	}
 
 	override public function update(dt: Float) {
-		collide();
 
 		if (lifetime < C.shard_lifetime) {
 			lifetime += dt;
 		} else {
-			// phys.body.space = null;
-			states.Play.drawer.remove(this.phys.body);
-			Luxe.physics.nape.space.bodies.remove(this.phys.body);
 			destroy();
 		} 
 	}
 
-	function collide() {
-
+	override public function ondestroy() {
+		states.Play.drawer.remove(this.phys.body);
+		Luxe.physics.nape.space.bodies.remove(this.phys.body);
+		super.ondestroy();
 	}
-
 }
