@@ -5,6 +5,7 @@ import luxe.Vector;
 import luxe.Color;
 
 import component.FargerPhys;
+import component.Armlet;
 
 import C;
 
@@ -20,6 +21,11 @@ class PlayerBase extends Visual {
 	override public function init() {
 		phys = new FargerPhys();
 		this.add(phys);
+
+		this.add(new Armlet());
+
+		var constraint = new nape.constraint.WeldJoint(this.phys.body, this.get('armlet').body,
+			new nape.geom.Vec2( 0,0), new nape.geom.Vec2( 0,0), 0 );
 
 		this.radians = phys.body.rotation;
 		this.barrel = new Vector();

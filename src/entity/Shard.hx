@@ -53,7 +53,7 @@ class Shard extends Visual {
 	}
 
 	override public function ondestroy() {
-		states.Play.drawer.remove(this.phys.body);
+		if (states.Play.drawer != null) states.Play.drawer.remove(this.phys.body);
 		Luxe.physics.nape.space.bodies.remove(this.phys.body);
 		super.ondestroy();
 	}
