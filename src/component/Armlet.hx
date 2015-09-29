@@ -37,6 +37,8 @@ class Armlet extends Component {
 		body.cbTypes.add( PhysTypes.armlet);
 		body.space = Luxe.physics.nape.space;
 
+		body.position.setxy(Main.w * 0.25, Main.h * 0.3);
+
 		// Debug drawer
 		if(states.Play.drawer != null) states.Play.drawer.add(body);
 

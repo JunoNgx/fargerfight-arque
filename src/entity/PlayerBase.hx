@@ -25,7 +25,8 @@ class PlayerBase extends Visual {
 		this.add(new Armlet());
 
 		var constraint = new nape.constraint.WeldJoint(this.phys.body, this.get('armlet').body,
-			new nape.geom.Vec2( 0,0), new nape.geom.Vec2( 0,0), 0 );
+			new nape.geom.Vec2(0, 0), new nape.geom.Vec2( 0, 0), Math.PI/2);
+			// this.phys.body., new nape.geom.Vec2( 0,0), 0 );
 
 		this.radians = phys.body.rotation;
 		this.barrel = new Vector();
