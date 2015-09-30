@@ -33,11 +33,12 @@ class Armlet extends Component {
 		});
 
 		body = new Body(BodyType.DYNAMIC);
-		body.shapes.add( new Polygon (Polygon.box( 24, 12)));
+		body.shapes.add( new Polygon (Polygon.box( 48, 12)));
+		body.setShapeMaterials(new Material(0.0, 0.0, 0.0, 0.1, 0.1));
 		body.cbTypes.add( PhysTypes.armlet);
 		body.space = Luxe.physics.nape.space;
 
-		body.position.setxy(Main.w * 0.25, Main.h * 0.3);
+		body.position.setxy(Main.w * 0.25, Main.h * 0.43);
 
 		// Debug drawer
 		if(states.Play.drawer != null) states.Play.drawer.add(body);

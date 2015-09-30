@@ -24,9 +24,49 @@ class PlayerBase extends Visual {
 
 		this.add(new Armlet());
 
-		var constraint = new nape.constraint.WeldJoint(this.phys.body, this.get('armlet').body,
-			new nape.geom.Vec2(0, 0), new nape.geom.Vec2( 0, 0), Math.PI/2);
+		var anchor = nape.geom.Vec2.weak (Main.w * 0.25, Main.h * 0.5);
+		var joint = new nape.constraint.WeldJoint(
+			this.phys.body,
+			this.get('armlet').body,
+			nape.geom.Vec2.weak(),
+			this.get('armlet').body.worldPointToLocal(anchor),
+			0
+		);
+		joint.space = Luxe.physics.nape.space;
+
+		// // I have no idea why this works, but it works
+		// var anchor = nape.geom.Vec2.weak (Main.w * 0.25, Main.h * 0.5);
+		// var joint = new nape.constraint.WeldJoint(
+		// 	this.phys.body,
+		// 	this.get('armlet').body,
+		// 	nape.geom.Vec2.weak(),
+		// 	this.get('armlet').body.worldPointToLocal(anchor),
+		// 	0
+		// );
+		// joint.space = Luxe.physics.nape.space;
+
+
+		// var constraint = new nape.constraint.WeldJoint(this.phys.body, this.get('armlet').body,
+		// 	this.phys.body.worldPointToLocal(weldPoint, true),
+		// 	this.get('armlet').body.worldPointToLocal(weldPoint, true),
+		// 	0);
+
+		// // For archiving purposes
+		// var constraint = new nape.constraint.WeldJoint(this.phys.body, this.get('armlet').body,
+		// 	// new nape.geom.Vec2(0, 0), new nape.geom.Vec2( 0, 0), Math.PI/2);
+		// 	// this.phys.body.worldPointToLocal(weldPoint, true),
+		// 	this.get('armlet').body.worldPointToLocal(weldPoint, true),
+		// 	nape.geom.Vec2.weak(),
+		// 	0);
 			// this.phys.body., new nape.geom.Vec2( 0,0), 0 );
+
+		// // One method that works
+		// var constraint = new nape.constraint.WeldJoint(this.phys.body, this.get('armlet').body,
+		// 	nape.geom.Vec2.weak(),
+		// 	this.get('armlet').body.worldPointToLocal(anchor, true),
+		// 	0);
+
+		// constraint.space = Luxe.physics.nape.space;
 
 		this.radians = phys.body.rotation;
 		this.barrel = new Vector();
