@@ -19,16 +19,24 @@ import nape.callbacks.OptionType;
 
 import PhysTypes;
 
+// typedef FargerPhys = {
+// 	> ComponentOptions,
+
+// 	var x: Float;
+// 	var y: Float;
+// }
+
 class FargerPhys extends Component {
 
 	public var body: Body;
 	public var hitShardListener: InteractionListener;
 
-	override public function new() {
+	override public function new(_x: Float, _y: Float) {
 		super({name: 'physic'});
 
 		body = new Body(BodyType.DYNAMIC);
 		body.shapes.add(new Polygon(Polygon.box(32, 64)));
+		body.position.setxy(Main.w * _x, Main.y * _y);
 		body.setShapeMaterials(new Material(0.0, 1.0, 2.0, 1.0, 0.1));
 		body.cbTypes.add(PhysTypes.farger);
 		body.space = Luxe.physics.nape.space;

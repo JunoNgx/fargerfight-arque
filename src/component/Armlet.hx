@@ -20,25 +20,33 @@ import nape.callbacks.OptionType;
 
 import PhysTypes;
 
+typedef ArmletOptions = {
+	> ComponentOptions,
+	var upperpos: Bool;
+	var leftside: Bool;
+}
+
 class Armlet extends Component {
 
 	public var body: Body;
 	public var hitShardListener: InteractionListener;
 	public var constraint: WeldJoint;
 	
-	override public function new () {
+	override public function new (_options: ArmletOptions) {
 
-		super({
-			name: 'armlet'
-		});
+		super(_options);
 
 		body = new Body(BodyType.DYNAMIC);
 		body.shapes.add( new Polygon (Polygon.box( 48, 12)));
-		body.setShapeMaterials(new Material(0.0, 0.0, 0.0, 0.1, 0.1));
+		body.setShapeMaterials(new Material(0.0, 0.0, 0.0));
 		body.cbTypes.add( PhysTypes.armlet);
 		body.space = Luxe.physics.nape.space;
 
-		body.position.setxy(Main.w * 0.25, Main.h * 0.43);
+		if (_options.upperpos) {
+			body.position.setxy(Main.w * 0.25, Main.h * 0.43);
+		} else {
+			body.position.setxy(Main.w * 0.25, Main.h * 0.57);
+		}
 
 		// Debug drawer
 		if(states.Play.drawer != null) states.Play.drawer.add(body);

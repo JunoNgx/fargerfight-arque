@@ -7,6 +7,9 @@ import luxe.Color;
 import component.FargerPhys;
 import component.Armlet;
 
+import nape.geom.Vec2;
+import nape.constraint.WeldJoint;
+
 import C;
 
 class PlayerBase extends Visual {
@@ -22,14 +25,31 @@ class PlayerBase extends Visual {
 		phys = new FargerPhys();
 		this.add(phys);
 
-		this.add(new Armlet());
+		// rotateMainBody();
+
+		this.radians = phys.body.rotation;
+		this.barrel = new Vector();
+		this.fire_cooldown = C.fire_cooldown;
+
+		equipArmletLt();
+		equipArmletRt();
+		equipShield();
+		equipArquen();
+	}
+
+	function equipArmletLt() {
+		this.add(new Armlet({
+			name: 'armlet_lt',
+			upperpos: true,
+			leftside: true,
+		}));
 
 		var anchor = nape.geom.Vec2.weak (Main.w * 0.25, Main.h * 0.5);
 		var joint = new nape.constraint.WeldJoint(
 			this.phys.body,
-			this.get('armlet').body,
+			this.get('armlet_lt').body,
 			nape.geom.Vec2.weak(),
-			this.get('armlet').body.worldPointToLocal(anchor),
+			this.get('armlet_lt').body.worldPointToLocal(anchor),
 			0
 		);
 		joint.space = Luxe.physics.nape.space;
@@ -67,10 +87,36 @@ class PlayerBase extends Visual {
 		// 	0);
 
 		// constraint.space = Luxe.physics.nape.space;
+	}
 
-		this.radians = phys.body.rotation;
-		this.barrel = new Vector();
-		this.fire_cooldown = C.fire_cooldown;
+	function equipArmletRt() {
+		this.add(new Armlet({
+			name: 'armlet_rt',
+			upperpos: false,
+			leftside: true,
+		}));
+
+		var anchor = nape.geom.Vec2.weak (Main.w * 0.25, Main.h * 0.5);
+		var joint = new WeldJoint(
+			this.phys.body,
+			this.get('armlet_rt').body,
+			Vec2.weak(),
+			this.get('armlet_rt').body.worldPointToLocal(anchor),
+			0
+		);
+		joint.space = Luxe.physics.nape.space;
+	}
+
+	function equipArquen() {
+		
+	}
+
+	function equipShield() {
+
+	}
+
+	function rotateMainBody() {
+		this.phys.body.rotation = 0;
 	}
 
 	override public function update(dt: Float) {

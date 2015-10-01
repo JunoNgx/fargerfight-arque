@@ -3,7 +3,6 @@ package component;
 import luxe.Component;
 import luxe.options.ComponentOptions;
 
-import luxe.Color;
 import luxe.Vector;
 import luxe.Input;
 

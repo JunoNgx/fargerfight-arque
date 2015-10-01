@@ -28,6 +28,7 @@ class Play extends State {
 	public static var covers: Body;
 
 	var azur: entity.Azur; // Left fighter
+	// var odeo: entity.Odeo; // Left fighter
 
 	override public function onenter<T> (_:T) {
 		drawer = new DebugDraw();
@@ -64,20 +65,8 @@ class Play extends State {
 	}
 
 	function spawnPlayers() {
-
 		azur = new entity.Azur();
-		// Creating and arming Azur
-		// azur = new Body(BodyType.DYNAMIC);
-		// azur.shapes.add(new Polygon(Polygon.box(32, 64)));
-		// azur.position.setxy(Main.w * 0.25, Main.h * 0.5);
-		// azur.space = Luxe.physics.nape.space;
-		// drawer.add(azur);
-
-		// azur.add(new component.LeftTouchControl());
-	}
-
-	function spawnOdeon() {
-
+		odeo = new entity.Odeo();
 	}
 
 	function spawnCovers() {
@@ -112,9 +101,9 @@ class Play extends State {
 		// debugText.text = Std.string(azur.physic.body.rotation);
 	}
 
-	override function onkeyup( e:KeyEvent ) {
-		if(e.keycode == Key.escape) {
-			Luxe.shutdown();
-		}
-	}
+	// override function onkeyup( e:KeyEvent ) {
+	// 	if(e.keycode == Key.escape) {
+	// 		Luxe.shutdown();
+	// 	}
+	// }
 }
