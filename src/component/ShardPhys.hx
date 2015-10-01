@@ -39,13 +39,13 @@ class ShardPhys extends Component {
 		// Debug drawer
 		if(states.Play.drawer != null) states.Play.drawer.add(body);
 
-		//Collision callback
-		hitFargerCallback = new InteractionListener(CbEvent.BEGIN, InteractionType.COLLISION,
-			PhysTypes.shard,
-			PhysTypes.farger,
-			hitFarger
-		);
-		Luxe.physics.nape.space.listeners.add(hitFargerCallback);
+		// //Collision callback
+		// hitFargerCallback = new InteractionListener(CbEvent.BEGIN, InteractionType.COLLISION,
+		// 	PhysTypes.shard,
+		// 	PhysTypes.farger,
+		// 	hitFarger
+		// );
+		// Luxe.physics.nape.space.listeners.add(hitFargerCallback);
 	}
 
 	function hitFarger(callback: InteractionCallback) {
@@ -53,10 +53,10 @@ class ShardPhys extends Component {
 		hostDestroy();
 	}
 
-	function hitArmor(callback: InteractionCallback) {
-		// TODO Spark based on this one's rotation
-		hostDestroy();
-	}
+	// function hitArmor(callback: InteractionCallback) {
+	// 	// TODO Spark based on this one's rotation
+	// 	hostDestroy();
+	// }
 
 	function hitArquen(callback: InteractionCallback) {
 		// TODO heavy bloodsplash based on this one's rotation

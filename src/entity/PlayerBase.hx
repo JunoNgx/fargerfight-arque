@@ -38,8 +38,8 @@ class PlayerBase extends Visual {
 	}
 
 	function acquireEquipments() {
-		equipArmlet(this.get('armlet_lt'));
-		equipArmlet(this.get('armlet_rt'));
+		this.joint_lt = equipArmlet(this.get('armlet_lt'));
+		this.joint_rt = equipArmlet(this.get('armlet_rt'));
 	}
 
 	function equipArmlet(_armlet: component.Armlet) {
@@ -53,6 +53,12 @@ class PlayerBase extends Visual {
 			0
 		);
 		joint.space = Luxe.physics.nape.space;
+
+		// if (states.Play.drawer != null) joint.debugDraw = true;
+		// no idea why the hell it doesn't work
+
+		return joint;
+		
 	}
 
 	override public function update(dt: Float) {

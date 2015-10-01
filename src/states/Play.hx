@@ -28,7 +28,7 @@ class Play extends State {
 	public static var covers: Body;
 
 	var azur: entity.Azur; // Left fighter
-	var odeo: entity.Odeo; // Left fighter
+	var odeo: entity.Odeo; // Right fighter
 
 	override public function onenter<T> (_:T) {
 		drawer = new DebugDraw();
@@ -101,9 +101,12 @@ class Play extends State {
 		// debugText.text = Std.string(azur.physic.body.rotation);
 	}
 
-	// override function onkeyup( e:KeyEvent ) {
-	// 	if(e.keycode == Key.escape) {
-	// 		Luxe.shutdown();
-	// 	}
-	// }
+	override function onkeyup( e:KeyEvent ) {
+		if(e.keycode == Key.escape) {
+			// Luxe.shutdown();
+
+			azur.joint_lt.active = false;
+			trace ('space');
+		}
+	}
 }
