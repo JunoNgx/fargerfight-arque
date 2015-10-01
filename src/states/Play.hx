@@ -28,7 +28,7 @@ class Play extends State {
 	public static var covers: Body;
 
 	var azur: entity.Azur; // Left fighter
-	// var odeo: entity.Odeo; // Left fighter
+	var odeo: entity.Odeo; // Left fighter
 
 	override public function onenter<T> (_:T) {
 		drawer = new DebugDraw();

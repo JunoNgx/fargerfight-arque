@@ -1,4 +1,4 @@
-package component;
+package component.touchcontrol;
 
 import luxe.Component;
 import luxe.options.ComponentOptions;
@@ -6,7 +6,7 @@ import luxe.options.ComponentOptions;
 import luxe.Vector;
 import luxe.Input;
 
-class BaseTouchControl extends Component {
+class Base extends Component {
 
 	public var isActive: Bool = false;
 	public var lastPress: Float;

@@ -22,8 +22,9 @@ import PhysTypes;
 
 typedef ArmletOptions = {
 	> ComponentOptions,
-	var upperpos: Bool;
-	var leftside: Bool;
+	var x: Float;
+	var y: Float;
+	var rot: Float;
 }
 
 class Armlet extends Component {
@@ -42,11 +43,15 @@ class Armlet extends Component {
 		body.cbTypes.add( PhysTypes.armlet);
 		body.space = Luxe.physics.nape.space;
 
-		if (_options.upperpos) {
-			body.position.setxy(Main.w * 0.25, Main.h * 0.43);
-		} else {
-			body.position.setxy(Main.w * 0.25, Main.h * 0.57);
-		}
+		// Position and rotation from arguments
+		body.position.setxy(Main.w * _options.x, Main.h * _options.y);
+		body.rotation = _options.rot;
+
+		// if (_options.upperpos) {
+		// 	body.position.setxy(Main.w * 0.25, Main.h * 0.43);
+		// } else {
+		// 	body.position.setxy(Main.w * 0.25, Main.h * 0.57);
+		// }
 
 		// Debug drawer
 		if(states.Play.drawer != null) states.Play.drawer.add(body);

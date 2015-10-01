@@ -31,15 +31,18 @@ class FargerPhys extends Component {
 	public var body: Body;
 	public var hitShardListener: InteractionListener;
 
-	override public function new(_x: Float, _y: Float) {
+	override public function new(_x: Float, _y: Float, _rot: Float) {
 		super({name: 'physic'});
 
 		body = new Body(BodyType.DYNAMIC);
 		body.shapes.add(new Polygon(Polygon.box(32, 64)));
-		body.position.setxy(Main.w * _x, Main.y * _y);
 		body.setShapeMaterials(new Material(0.0, 1.0, 2.0, 1.0, 0.1));
 		body.cbTypes.add(PhysTypes.farger);
 		body.space = Luxe.physics.nape.space;
+
+		// Position and rotation from arguments
+		body.position.setxy(Main.w * _x, Main.h * _y);
+		body.rotation = _rot;
 
 		// Debug drawer
 		if(states.Play.drawer != null) states.Play.drawer.add(body);

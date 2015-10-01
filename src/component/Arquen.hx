@@ -16,7 +16,7 @@ import nape.callbacks.InteractionListener;
 import nape.callbacks.InteractionType;
 import nape.callbacks.OptionType;
 
-class Shield extends Component {
+class Arquen extends Component {
 
 	override public function new () {
 		
