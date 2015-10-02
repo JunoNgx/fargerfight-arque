@@ -67,6 +67,16 @@ class PlayerBase extends Visual {
 		barrel.y = this.pos.y + C.barrel_length * Math.sin(this.radians + Math.PI * 11/28);
 
 		if (this.fire_cooldown < C.fire_cooldown) this.fire_cooldown += dt;
+
+		Luxe.draw.text({
+			text: '${hp}',
+			pos: new Vector(this.pos.x, this.pos.y - 64),
+			point_size: 48,
+			align: right,
+			immediate: true,
+			depth: 20,
+			color: new Color().rgb(0xdddddd),
+		});
 		
 	}
 

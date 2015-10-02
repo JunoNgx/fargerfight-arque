@@ -45,7 +45,7 @@ class Armlet extends Component {
 
 		// Position and rotation from arguments
 		body.position.setxy(Main.w * _options.x, Main.h * _options.y);
-		body.rotation = _options.rot;`
+		body.rotation = _options.rot;
 
 		// if (_options.upperpos) {
 		// 	body.position.setxy(Main.w * 0.25, Main.h * 0.43);
@@ -77,21 +77,36 @@ class Armlet extends Component {
 	}
 
 	function hitShard(callback: InteractionCallback) {
+
+		if(callback.int1.castBody.id == body.id) {
+
+			var host: entity.PlayerBase = cast entity;
+			
+			if (this.name == 'armlet_lt') {
+				host.joint_lt.active = false;
+			}	
+
+			if (this.name == 'armlet_rt') {
+				host.joint_rt.active = false;
+			}
+		}
+
+
 		// if (states.Play.drawer != null) states.Play.drawer.remove(this.body);
 		// Luxe.physics.nape.space.bodies.remove(this.body);
 		// entity.remove(this.name);
 
-		trace(this.name);
+		// trace(this.name);
 
-		var host: entity.PlayerBase = cast entity;
+		// var host: entity.PlayerBase = cast entity;
 
-		if (this.name == 'armlet_lt') {
-			host.joint_lt.active = false;
-		}
+		// if (this.name == 'armlet_lt') {
+		// 	host.joint_lt.active = false;
+		// }
 
-		if (this.name == 'armlet_rt') {
-			host.joint_rt.active = false;
-		}
+		// if (this.name == 'armlet_rt') {
+		// 	host.joint_rt.active = false;
+		// }
 	}
 
 	override public function init() {

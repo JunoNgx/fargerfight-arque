@@ -57,10 +57,13 @@ class FargerPhys extends Component {
 	}
 
 	function hitShard(callback: InteractionCallback) {
-		var host: entity.PlayerBase = cast entity;
-		host.hp -= 1;
+	
+		if(callback.int1.castBody.id == body.id) {
+			var host: entity.PlayerBase = cast entity;
+			host.hp -= 1;
 
-		trace('lost 1 hp');
+			trace('lost 1 hp');
+		}
 
 		// TODO Slowmo
 		// TODO Impulse towards Farger
