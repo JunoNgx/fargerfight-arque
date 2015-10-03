@@ -26,6 +26,8 @@ class ShardPhys extends Component {
 
 	public var body: Body;
 	public var hitFargerCallback: InteractionListener;
+	public var hitArmletCallback: InteractionListener;
+	public var hitArquenCallback: InteractionListener;
 
 	override public function new() {
 		super({name: 'physic'});
@@ -39,13 +41,27 @@ class ShardPhys extends Component {
 		// Debug drawer
 		if(states.Play.drawer != null) states.Play.drawer.add(body);
 
-		// //Collision callback
-		// hitFargerCallback = new InteractionListener(CbEvent.BEGIN, InteractionType.COLLISION,
-		// 	PhysTypes.shard,
-		// 	PhysTypes.farger,
-		// 	hitFarger
-		// );
-		// Luxe.physics.nape.space.listeners.add(hitFargerCallback);
+		//Collision callback
+		hitFargerCallback = new InteractionListener(CbEvent.BEGIN, InteractionType.COLLISION,
+			PhysTypes.shard,
+			PhysTypes.farger,
+			hitFarger
+		);
+		Luxe.physics.nape.space.listeners.add(hitFargerCallback);
+
+		hitArmletCallback = new InteractionListener(CbEvent.BEGIN, InteractionType.COLLISION,
+			PhysTypes.shard,
+			PhysTypes.armlet,
+			hitArmlet
+		);
+		Luxe.physics.nape.space.listeners.add(hitArmletCallback);
+
+		hitArquenCallback = new InteractionListener(CbEvent.BEGIN, InteractionType.COLLISION,
+			PhysTypes.shard,
+			PhysTypes.arquen,
+			hitArquen
+		);
+		Luxe.physics.nape.space.listeners.add(hitArquenCallback);
 	}
 
 	function hitFarger(callback: InteractionCallback) {
@@ -53,14 +69,16 @@ class ShardPhys extends Component {
 		hostDestroy();
 	}
 
-	// function hitArmor(callback: InteractionCallback) {
-	// 	// TODO Spark based on this one's rotation
-	// 	hostDestroy();
-	// }
+	// Current mechanic: bounce against shield, destroyed against undetached armlet
+	function hitArmlet(callback: InteractionCallback) {
+		// TODO spark
+		hostDestroy();
+	}
 
 	function hitArquen(callback: InteractionCallback) {
 		// TODO heavy bloodsplash based on this one's rotation
 		// TODO Luxe.events.fire('arque')
+		// TODO Timescale
 		hostDestroy();
 	}
 
