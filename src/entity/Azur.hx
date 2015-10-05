@@ -43,6 +43,6 @@ class Azur extends PlayerBase {
 		// entity-specific controller
 		this.add(new component.touchcontrol.Left());
 
-		super.init();
+		super.init(); // Assign properties and acquireEquipments()
 	}
 }

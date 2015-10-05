@@ -6,7 +6,7 @@ import luxe.Color;
 
 import component.FargerPhys;
 import component.Armlet;
-// import component.Shield;
+import component.Shield;
 // import component.Arquen;
 
 import nape.phys.Body;
@@ -41,6 +41,25 @@ class PlayerBase extends Visual {
 		this.joint_lt = equipArmlet(this.get('armlet_lt'));
 		this.joint_rt = equipArmlet(this.get('armlet_rt'));
 	}
+
+	// function equipArmor(_armlet: component.Armlet) {
+	// 	// var anchor = Vec2.weak (this.phys.body.position.x, Main.h * 0.5);
+	// 	var anchor = this.phys.body.position;
+	// 	var joint = new nape.constraint.WeldJoint(
+	// 		this.phys.body,
+	// 		_armlet.body,
+	// 		nape.geom.Vec2.weak(),
+	// 		_armlet.body.worldPointToLocal(anchor),
+	// 		0
+	// 	);
+	// 	joint.space = Luxe.physics.nape.space;
+
+	// 	// if (states.Play.drawer != null) joint.debugDraw = true;
+	// 	// no idea why the hell it doesn't work
+
+	// 	return joint;
+		
+	// }
 
 	function equipArmlet(_armlet: component.Armlet) {
 		// var anchor = Vec2.weak (this.phys.body.position.x, Main.h * 0.5);

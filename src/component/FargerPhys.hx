@@ -63,6 +63,16 @@ class FargerPhys extends Component {
 			host.hp -= 1;
 
 			trace('lost 1 hp');
+
+			// Push the fighter away when hit for enhanced feedback
+			var angle: Float = Math.atan2(
+				callback.int1.castBody.position.y - callback.int2.castBody.position.y,
+				callback.int1.castBody.position.x - callback.int2.castBody.position.x
+			);
+			var force:Float = 2000;
+			body.applyImpulse(new Vec2(force * Math.cos(angle), force * Math.sin(angle)));
+
+			// TODO if (hp == 1) force = 5000;
 		}
 
 		// TODO Slowmo
