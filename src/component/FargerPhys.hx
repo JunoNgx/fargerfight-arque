@@ -70,8 +70,9 @@ class FargerPhys extends Component {
 				callback.int1.castBody.position.x - callback.int2.castBody.position.x
 			);
 			var force:Float = 2000;
-			body.applyImpulse(new Vec2(force * Math.cos(angle), force * Math.sin(angle)));
+			body.applyImpulse(new Vec2(force * Math.cos(angle), force * Math.sin(angle)), body.position);
 
+			// BUG: very random direction of force
 			// TODO if (hp == 1) force = 5000;
 		}
 

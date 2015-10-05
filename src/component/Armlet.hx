@@ -10,8 +10,6 @@ import nape.shape.Polygon;
 
 import nape.geom.Vec2;
 
-// import nape.constraint.WeldJoint;
-
 import nape.callbacks.CbEvent;
 import nape.callbacks.InteractionCallback;
 import nape.callbacks.InteractionListener;
@@ -19,6 +17,7 @@ import nape.callbacks.InteractionType;
 import nape.callbacks.OptionType;
 
 import PhysTypes;
+import C;
 
 typedef ArmletOptions = {
 	> ComponentOptions,
@@ -40,7 +39,7 @@ class Armlet extends Component {
 		super(_options);
 
 		body = new Body(BodyType.DYNAMIC);
-		body.shapes.add( new Polygon (Polygon.box( 64, 24)));
+		body.shapes.add( new Polygon (C.body_armlet) );
 		body.setShapeMaterials(new Material(0.0, 0.0, 0.0));
 		body.cbTypes.add( PhysTypes.armlet);
 		body.space = Luxe.physics.nape.space;

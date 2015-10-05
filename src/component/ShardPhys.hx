@@ -22,6 +22,8 @@ import nape.callbacks.OptionType;
 
 import PhysTypes;
 
+// This is not based on component.ArmBase.hx, despite being very similar
+// Too tired to find a way to intuitively implement that
 class ShardPhys extends Component {
 
 	public var body: Body;
