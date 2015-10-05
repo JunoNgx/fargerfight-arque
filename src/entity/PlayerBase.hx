@@ -4,9 +4,9 @@ import luxe.Visual;
 import luxe.Vector;
 import luxe.Color;
 
-import component.FargerPhys;
-import component.Armlet;
-import component.Shield;
+// import component.FargerPhys;
+// import component.Armlet;
+// import component.Shield;
 // import component.Arquen;
 
 import nape.phys.Body;
@@ -18,8 +18,9 @@ import C;
 class PlayerBase extends Visual {
 
 	public var hp: Int = 3;
+	public var alive: Bool = true;
 
-	public var phys: FargerPhys;
+	public var phys: component.FargerPhys;
 	public var joint_rt: WeldJoint;
 	public var joint_lt: WeldJoint;
 	public var joint_sh: WeldJoint;
@@ -34,15 +35,32 @@ class PlayerBase extends Visual {
 		this.fire_cooldown = C.fire_cooldown;
 
 		// Important lines that create joints/constraints for components
-		acquireEquipments();
+		joinEquipments(); // Equip all armpieces using joinEquipments()
 	}
 
-	function acquireEquipments() {
-		this.joint_lt = equipArmlet(this.get('armlet_lt'));
-		this.joint_rt = equipArmlet(this.get('armlet_rt'));
+	function joinEquipments() {
+		this.joint_lt = equipArmor(this.get('armlet_lt'));
+		this.joint_rt = equipArmor(this.get('armlet_rt'));
+		this.joint_sh = equipArmor(this.get('shield'));
+		this.joint_aq = equipArmor(this.get('arquen'));
 	}
 
-	// function equipArmor(_armlet: component.Armlet) {
+	// Create a joint/constraint with a component.ArmBase
+	// (all of whom Farger's components are based on)
+	function equipArmor(_armpiece: component.ArmBase) {
+		var anchor = this.phys.body.position;
+		var joint = new nape.constraint.WeldJoint(
+			this.phys.body,
+			_armpiece.body,
+			nape.geom.Vec2.weak(),
+			_armpiece.body.worldPointToLocal(anchor),
+			0
+		);
+		joint.space = Luxe.physics.nape.space;
+		return joint;
+	}
+
+	// function equipArmlet(_armlet: component.Armlet) {
 	// 	// var anchor = Vec2.weak (this.phys.body.position.x, Main.h * 0.5);
 	// 	var anchor = this.phys.body.position;
 	// 	var joint = new nape.constraint.WeldJoint(
@@ -61,25 +79,6 @@ class PlayerBase extends Visual {
 		
 	// }
 
-	function equipArmlet(_armlet: component.Armlet) {
-		// var anchor = Vec2.weak (this.phys.body.position.x, Main.h * 0.5);
-		var anchor = this.phys.body.position;
-		var joint = new nape.constraint.WeldJoint(
-			this.phys.body,
-			_armlet.body,
-			nape.geom.Vec2.weak(),
-			_armlet.body.worldPointToLocal(anchor),
-			0
-		);
-		joint.space = Luxe.physics.nape.space;
-
-		// if (states.Play.drawer != null) joint.debugDraw = true;
-		// no idea why the hell it doesn't work
-
-		return joint;
-		
-	}
-
 	override public function update(dt: Float) {
 		
 		barrel.x = this.pos.x + C.barrel_length * Math.cos(this.radians + Math.PI * 11/28);
@@ -87,6 +86,7 @@ class PlayerBase extends Visual {
 
 		if (this.fire_cooldown < C.fire_cooldown) this.fire_cooldown += dt;
 
+		// DebugArea
 		Luxe.draw.text({
 			text: '${hp}',
 			pos: new Vector(this.pos.x, this.pos.y - 64),

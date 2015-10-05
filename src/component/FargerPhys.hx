@@ -1,62 +1,18 @@
 package component;
 
-import luxe.Component;
-import luxe.options.ComponentOptions;
+import component.ArmBase;
 
 import luxe.Vector;
 
 import nape.geom.Vec2;
-import nape.phys.Body;
-import nape.phys.Material;
-import nape.phys.BodyType;
-import nape.shape.Polygon;
-
-import nape.callbacks.CbEvent;
 import nape.callbacks.InteractionCallback;
-import nape.callbacks.InteractionListener;
-import nape.callbacks.InteractionType;
-import nape.callbacks.OptionType;
 
 import PhysTypes;
+import C;
 
-// typedef FargerPhys = {
-// 	> ComponentOptions,
+class FargerPhys extends ArmBase {
 
-// 	var x: Float;
-// 	var y: Float;
-// }
-
-class FargerPhys extends Component {
-
-	public var body: Body;
-	public var hitShardListener: InteractionListener;
-
-	override public function new(_x: Float, _y: Float, _rot: Float) {
-		super({name: 'physic'});
-
-		body = new Body(BodyType.DYNAMIC);
-		body.shapes.add(new Polygon(Polygon.box(32, 64)));
-		body.setShapeMaterials(new Material(0.0, 1.0, 2.0, 1.0, 0.1));
-		body.cbTypes.add(PhysTypes.farger);
-		body.space = Luxe.physics.nape.space;
-
-		// Position and rotation from arguments
-		body.position.setxy(Main.w * _x, Main.h * _y);
-		body.rotation = _rot;
-
-		// Debug drawer
-		if(states.Play.drawer != null) states.Play.drawer.add(body);
-
-		//Collision callbacks
-		hitShardListener = new InteractionListener(CbEvent.BEGIN, InteractionType.COLLISION,
-			PhysTypes.farger,
-			PhysTypes.shard,
-			hitShard
-		);
-		Luxe.physics.nape.space.listeners.add(hitShardListener);
-	}
-
-	function hitShard(callback: InteractionCallback) {
+	override function hitShard(callback: InteractionCallback) {
 	
 		if(callback.int1.castBody.id == body.id) {
 			var host: entity.PlayerBase = cast entity;

@@ -4,12 +4,22 @@ import luxe.Component;
 import luxe.options.ComponentOptions;
 
 import nape.phys.Body;
-import nape.phys.Shape;
+// import nape.phys.Shape;
 import nape.phys.Material;
 import nape.phys.BodyType;
 import nape.shape.Polygon;
 
+import nape.geom.Vec2;
+
+import nape.callbacks.CbType;
+import nape.callbacks.CbEvent;
+import nape.callbacks.InteractionCallback;
+import nape.callbacks.InteractionListener;
+import nape.callbacks.InteractionType;
+import nape.callbacks.OptionType;
+
 import PhysTypes;
+import C;
 
 typedef ArmOptions = {
 	> ComponentOptions,
@@ -17,7 +27,8 @@ typedef ArmOptions = {
 	var x: Float;
 	var y: Float;
 	var rot: Float;
-	var shape: Shape;
+	var shape: Array<nape.geom.Vec2>;
+	var cbType: CbType;
 }
 
 // Base class for armor/firearm components,
@@ -37,13 +48,13 @@ class ArmBase extends Component {
 		// Basic settings
 		body = new Body(BodyType.DYNAMIC);
 		body.setShapeMaterials(new Material(0.0, 0.0, 0.0));
-		body.cbTypes.add( PhysTypes.armlet);
 		body.space = Luxe.physics.nape.space;
 
-		// Position and rotation from arguments
-		body.shapes.add(_options.shape);
+		// Processing arguments
+		body.shapes.add(new Polygon(_options.shape));
 		body.position.setxy(Main.w * _options.x, Main.h * _options.y);
 		body.rotation = _options.rot;
+		if (_options.cbType != null) body.cbTypes.add( _options.cbType );
 
 		// Debug drawer
 		if(states.Play.drawer != null) states.Play.drawer.add(body);
