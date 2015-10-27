@@ -35,7 +35,7 @@ class PlayerBase extends Visual {
 		this.fire_cooldown = C.fire_cooldown;
 
 		// Important lines that create joints/constraints for components
-		joinEquipments(); // Equip all armpieces using joinEquipments()
+		// joinEquipments(); // Equip all armpieces using joinEquipments()
 	}
 
 	function joinEquipments() {
