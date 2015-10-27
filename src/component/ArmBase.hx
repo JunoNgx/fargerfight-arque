@@ -28,8 +28,8 @@ typedef ArmOptions = {
 	var x: Float;
 	var y: Float;
 	var rot: Float;
-	// var shape: Array<nape.geom.Vec2>;
-	var shape: Shape;
+	var shape: Array<nape.geom.Vec2>;
+	// var shape: Shape;
 	var cbType: CbType;
 }
 
@@ -53,7 +53,7 @@ class ArmBase extends Component {
 		body.space = Luxe.physics.nape.space;
 
 		// Processing arguments
-		body.shapes.add(_options.shape);
+		body.shapes.add(new Polygon(_options.shape));
 		body.position.setxy(Main.w * _options.x, Main.h * _options.y);
 		body.rotation = _options.rot;
 		if (_options.cbType != null) body.cbTypes.add( _options.cbType );

@@ -21,12 +21,14 @@ class Azur extends PlayerBase {
 	override public function new() {
 		super({
 			name: 'azur',
+			// debug only
+			depth: -10
 		});
 
 		phys = new component.FargerPhys({
 			name: 'physic',
 			// shape: C.body_farger,
-			shape: new Polygon(Polygon.rect(24, 24, 3, 0, true)),
+			shape: C.body_farger,
 			cbType: PhysTypes.farger,
 			x: 0.25, y: 0.5, rot: 0  // x and y relative coordinates, rotation
 		});
@@ -35,42 +37,42 @@ class Azur extends PlayerBase {
 
 	override public function init() {
 
-		// this.add(new component.Armlet({
-		// 	name: 'armlet_lt',
-		// 	shape: C.body_armlet,
-		// 	cbType: PhysTypes.armlet,
-		// 	x: 0.25,
-		// 	y: 0.43,
-		// 	rot: 0,
-		// }));
+		this.add(new component.Armlet({
+			name: 'armlet_lt',
+			shape: C.body_armlet,
+			cbType: PhysTypes.armlet,
+			x: 0.25,
+			y: 0.44,
+			rot: -Math.PI/6,
+		}));
 
-		// this.add(new component.Armlet({
-		// 	name: 'armlet_rt',
-		// 	shape: C.body_armlet,
-		// 	cbType: PhysTypes.armlet,
-		// 	x: 0.25,
-		// 	y: 0.57,
-		// 	rot: 0,
-		// }));
+		this.add(new component.Armlet({
+			name: 'armlet_rt',
+			shape: C.body_armlet,
+			cbType: PhysTypes.armlet,
+			x: 0.25,
+			y: 0.56,
+			rot: Math.PI/6,
+		}));
 
-		// // Shield
-		// this.add(new component.Shield({
-		// 	name: 'shield',
-		// 	shape: C.body_shield,
-		// 	cbType: PhysTypes.shield,
-		// 	x: 0.3,
-		// 	y: 0.48,
-		// 	rot: 0,
-		// }));
+		// Shield
+		this.add(new component.Shield({
+			name: 'shield',
+			shape: C.body_shield,
+			cbType: PhysTypes.shield,
+			x: 0.28,
+			y: 0.48,
+			rot: 0,
+		}));
 
-		// this.add(new component.Arquen({
-		// 	name: 'arquen',
-		// 	shape: C.body_arquen,
-		// 	cbType: PhysTypes.arquen,
-		// 	x: 0.3,
-		// 	y: 0.54,
-		// 	rot: 0,
-		// }));
+		this.add(new component.Arquen({
+			name: 'arquen',
+			shape: C.body_arquen,
+			cbType: PhysTypes.arquen,
+			x: 0.28,
+			y: 0.55,
+			rot: 0,
+		}));
 
 		// entity-specific controller
 		this.add(new component.touchcontrol.Left());

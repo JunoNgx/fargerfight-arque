@@ -35,26 +35,26 @@ class PlayerBase extends Visual {
 		this.fire_cooldown = C.fire_cooldown;
 
 		// Important lines that create joints/constraints for components
-		// joinEquipments(); // Equip all armpieces using joinEquipments()
+		joinEquipments(); // Equip all armpieces using joinEquipments()
 	}
 
 	function joinEquipments() {
-		this.joint_lt = equipArmor(this.get('armlet_lt'));
-		this.joint_rt = equipArmor(this.get('armlet_rt'));
-		this.joint_sh = equipArmor(this.get('shield'));
-		this.joint_aq = equipArmor(this.get('arquen'));
+		this.joint_lt = equipArmor(this.get('armlet_lt'), -Math.PI/6);
+		this.joint_rt = equipArmor(this.get('armlet_rt'), Math.PI/6);
+		this.joint_sh = equipArmor(this.get('shield'), 0);
+		this.joint_aq = equipArmor(this.get('arquen'), 0);
 	}
 
 	// Create a joint/constraint with a component.ArmBase
 	// (all of whom Farger's components are based on)
-	function equipArmor(_armpiece: component.ArmBase) {
+	function equipArmor(_armpiece: component.ArmBase, _phase: Float) {
 		var anchor = this.phys.body.position;
 		var joint = new nape.constraint.WeldJoint(
 			this.phys.body,
 			_armpiece.body,
 			nape.geom.Vec2.weak(),
 			_armpiece.body.worldPointToLocal(anchor),
-			0
+			_phase // offset of rotation between two bodies
 		);
 		joint.space = Luxe.physics.nape.space;
 		return joint;
