@@ -6,6 +6,8 @@ import luxe.Color;
 import luxe.Vector;
 import luxe.Camera;
 
+import luxe.Particles;
+
 import nape.geom.Vec2;
 import nape.phys.Body;
 import nape.phys.BodyType;
@@ -27,6 +29,8 @@ class Play extends State {
 	public static var borders: Body;
 	public static var covers: Body;
 
+	public static var spark: particle.Spark;
+
 	var azur: entity.Azur; // Left fighter
 	var odeo: entity.Odeo; // Right fighter
 
@@ -37,6 +41,9 @@ class Play extends State {
 
 		setupWorld();
 		spawnPlayers();
+		setupCrew();
+
+		setupEvents();
 
 	}
 
@@ -76,6 +83,18 @@ class Play extends State {
 		drawer.add(covers);
 	}
 
+	function setupCrew() {
+		spark = new particle.Spark();
+		spark.stop();
+	}
+
+	function setupEvents(){
+		Luxe.events.listen('effect.spark', function(_e: PosEvent) {
+			spark.flash(_e.pos);
+		});
+
+	}
+
 	override public function update(dt: Float) {
 
 	}
@@ -84,6 +103,8 @@ class Play extends State {
 
 	}
 
+
+	// #DebugArea
 	override public function onmousemove(e: MouseEvent) {
 
 		// var desRot = Math.atan2(e.yrel * 100, e.xrel * 100);
@@ -101,6 +122,11 @@ class Play extends State {
 		// debugText.text = Std.string(azur.physic.body.rotation);
 	}
 
+	override public function onmousedown(e: MouseEvent) {
+		// spark.flash(e.pos);
+		// Luxe.events.fire('effect.spark', {pos: e.pos});
+	}
+
 	override function onkeyup( e:KeyEvent ) {
 		if(e.keycode == Key.escape) {
 			// Luxe.shutdown();
@@ -109,4 +135,8 @@ class Play extends State {
 			trace ('space');
 		}
 	}
+}
+
+typedef PosEvent = {
+	pos: Vector
 }

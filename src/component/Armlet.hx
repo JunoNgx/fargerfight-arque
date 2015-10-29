@@ -1,5 +1,7 @@
 package component;
 
+import luxe.Vector;
+
 import component.ArmBase;
 
 import nape.geom.Vec2;
@@ -27,6 +29,8 @@ class Armlet extends ArmBase {
 				var dir = Luxe.utils.random.float(Math.PI*2);
 				body.applyImpulse(new Vec2(C.if_armlet * Math.cos(dir), C.if_armlet * Math.sin(dir)), body.position);
 				body.angularVel = Luxe.utils.random.float(-1, 1);
+
+				Luxe.events.fire('effect.spark', {pos: new Vector(body.position.x, body.position.y)});
 			}
 
 			var host: entity.PlayerBase = cast entity;
