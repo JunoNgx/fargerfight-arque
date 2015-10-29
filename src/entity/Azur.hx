@@ -27,7 +27,6 @@ class Azur extends PlayerBase {
 
 		phys = new component.FargerPhys({
 			name: 'physic',
-			// shape: C.body_farger,
 			shape: C.body_farger,
 			cbType: PhysTypes.farger,
 			x: 0.25, y: 0.5, rot: 0  // x and y relative coordinates, rotation

@@ -23,9 +23,10 @@ class Armlet extends ArmBase {
 				// Enhance feedback by applying a force upon detachment
 				// the armlet remain will fly around for a while
 				// might (randomly) affect farger if direction is against it
-				var force = 1000;
+				// var force = 700;
 				var dir = Luxe.utils.random.float(Math.PI*2);
-				body.applyImpulse(new Vec2(force * Math.cos(dir), force * Math.sin(dir)), body.position);
+				body.applyImpulse(new Vec2(C.if_armlet * Math.cos(dir), C.if_armlet * Math.sin(dir)), body.position);
+				body.angularVel = Luxe.utils.random.float(-1, 1);
 			}
 
 			var host: entity.PlayerBase = cast entity;

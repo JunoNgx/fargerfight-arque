@@ -6,6 +6,8 @@ import luxe.options.ComponentOptions;
 import luxe.Vector;
 import luxe.Input;
 
+import C;
+
 class Base extends Component {
 
 	public var isActive: Bool = false;
@@ -21,7 +23,7 @@ class Base extends Component {
 
 	override public function ontouchdown(e: TouchEvent) {
 		isActive = true;
-		if ((Luxe.time - lastPress) < 0.3) fire();
+		if ((Luxe.time - lastPress) < C.double_tap) fire();
 		lastPress = Luxe.time;
 	}
 
@@ -72,7 +74,7 @@ class Base extends Component {
 		// Magical and clever code I don't quite understand. That is a very very bad habit.
 		var diff = (desRot - curRot + Math.PI) % (2 * Math.PI) - Math.PI;
 
-		host.phys.body.angularVel = diff * 2;
+		host.phys.body.angularVel = diff * C.angularVel_multiplier;
 	}
 
 	override public function onmouseup(e: MouseEvent) {

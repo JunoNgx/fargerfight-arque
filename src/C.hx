@@ -4,7 +4,13 @@ import nape.shape.Polygon;
 
 class C {
 
+	// Touch control
+	public static var double_tap: Float = 0.3;
 	public static var force_multiplier: Float = 12;
+	public static var angularVel_multiplier: Float = 3;
+
+	// Impact forces upon breakage of joints
+	public static var if_armlet: Float = 700;
 
 	public static var fire_cooldown: Float = 0.75;
 	public static var barrel_length: Float = 128;

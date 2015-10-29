@@ -18,6 +18,7 @@ class Odeo extends PlayerBase {
 	override public function new() {
 		super({
 			name: 'odeo',
+			depth: -10,
 		});
 
 		phys = new component.FargerPhys({
@@ -37,8 +38,8 @@ class Odeo extends PlayerBase {
 			shape: C.body_armlet,
 			cbType: PhysTypes.armlet,
 			x: 0.75,
-			y: 0.57,
-			rot: -Math.PI,
+			y: 0.56,
+			rot: -Math.PI - Math.PI/6,
 		}));
 
 		this.add(new component.Armlet({
@@ -46,8 +47,8 @@ class Odeo extends PlayerBase {
 			shape: C.body_armlet,
 			cbType: PhysTypes.armlet,
 			x: 0.75,
-			y: 0.43,
-			rot: -Math.PI,
+			y: 0.44,
+			rot: -Math.PI + Math.PI/6,
 		}));
 
 		// Shield
@@ -55,7 +56,7 @@ class Odeo extends PlayerBase {
 			name: 'shield',
 			shape: C.body_shield,
 			cbType: PhysTypes.shield,
-			x: 0.7,
+			x: 0.72,
 			y: 0.52,
 			rot: -Math.PI
 		}));
@@ -64,8 +65,8 @@ class Odeo extends PlayerBase {
 			name: 'arquen',
 			shape: C.body_arquen,
 			cbType: PhysTypes.arquen,
-			x: 0.7,
-			y: 0.46,
+			x: 0.72,
+			y: 0.45,
 			rot: -Math.PI,
 		}));
 
