@@ -49,6 +49,7 @@ class Shard extends Visual {
 			lifetime += dt;
 		} else {
 			destroy();
+			Luxe.events.fire('effect.explosion', {pos: this.pos});
 		} 
 	}
 

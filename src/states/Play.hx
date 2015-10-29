@@ -6,7 +6,7 @@ import luxe.Color;
 import luxe.Vector;
 import luxe.Camera;
 
-import luxe.Particles;
+// import luxe.Particles;
 
 import nape.geom.Vec2;
 import nape.phys.Body;
@@ -19,6 +19,8 @@ import nape.space.Space;
 
 import luxe.physics.nape.DebugDraw;
 
+import particle.Spark;
+import particle.Explosion;
 import C;
 
 class Play extends State {
@@ -30,6 +32,7 @@ class Play extends State {
 	public static var covers: Body;
 
 	public static var spark: particle.Spark;
+	public static var demom: particle.Explosion;
 
 	var azur: entity.Azur; // Left fighter
 	var odeo: entity.Odeo; // Right fighter
@@ -85,12 +88,19 @@ class Play extends State {
 
 	function setupCrew() {
 		spark = new particle.Spark();
-		spark.stop();
+		// spark.stop();
+
+		demom = new particle.Explosion();
+		// demom.stop();
 	}
 
 	function setupEvents(){
 		Luxe.events.listen('effect.spark', function(_e: PosEvent) {
 			spark.flash(_e.pos);
+		});
+
+		Luxe.events.listen('effect.explosion', function(_e: PosEvent) {
+			demom.flash(_e.pos);
 		});
 
 	}
@@ -125,6 +135,7 @@ class Play extends State {
 	override public function onmousedown(e: MouseEvent) {
 		// spark.flash(e.pos);
 		// Luxe.events.fire('effect.spark', {pos: e.pos});
+		Luxe.events.fire('effect.explosion', {pos: e.pos});
 	}
 
 	override function onkeyup( e:KeyEvent ) {

@@ -21,6 +21,7 @@ import nape.callbacks.InteractionType;
 import nape.callbacks.OptionType;
 
 import PhysTypes;
+import C;
 
 // This is not based on component.ArmBase.hx, despite being very similar
 // Too tired to find a way to intuitively implement that
@@ -35,7 +36,7 @@ class ShardPhys extends Component {
 		super({name: 'physic'});
 
 		body = new Body(BodyType.DYNAMIC);
-		body.shapes.add(new Circle(24));
+		body.shapes.add(new Circle(C.shard_radius));
 		body.setShapeMaterials(new Material(1.0, 0.1, 1, 0.05, 0.1));
 		body.cbTypes.add(PhysTypes.shard);
 		body.space = Luxe.physics.nape.space;

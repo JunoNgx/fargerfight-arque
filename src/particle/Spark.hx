@@ -3,9 +3,12 @@ package particle;
 import luxe.Color;
 import luxe.Vector;
 
-import luxe.Particles;
+// import luxe.Particles;
 
-class Spark extends ParticleSystem {
+import particle.PartBase;
+import C;
+
+class Spark extends PartBase {
 	
 	override public function new() {
 		super({
@@ -35,16 +38,8 @@ class Spark extends ParticleSystem {
 			start_size_random: new Vector(0,0),
 			end_size: new Vector(0, 0),
 			end_size_random: new Vector(0,0),
-
-
-			// speed: 
-			// speed_random: ,
 		});
-	}
 
-	public function flash(_pos: Vector) {
-		this.pos = _pos;
-		this.start(0.05);
+		this.stop();
 	}
-
 }
