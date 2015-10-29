@@ -31,15 +31,17 @@ class Armlet extends ArmBase {
 				body.angularVel = Luxe.utils.random.float(-1, 1);
 
 				Luxe.events.fire('effect.spark', {pos: new Vector(body.position.x, body.position.y)});
+				
+				// Removal of constraint/joint
+				var host: entity.PlayerBase = cast entity;
+				if (this.name == 'armlet_lt') {
+					host.joint_lt.active = false;
+				}	
+				if (this.name == 'armlet_rt') {
+					host.joint_rt.active = false;
+				}
 			}
 
-			var host: entity.PlayerBase = cast entity;
-			if (this.name == 'armlet_lt') {
-				host.joint_lt.active = false;
-			}	
-			if (this.name == 'armlet_rt') {
-				host.joint_rt.active = false;
-			}
 		}
 	}
 
