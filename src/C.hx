@@ -16,13 +16,18 @@ class C {
 	public static var barrel_length: Float = 128;
 
 	public static var shard_radius: Float = 20;
-	public static var shard_lifetime: Float = 2;
+	public static var shard_lifetime: Float = 10;
 	public static var shard_speed: Float = 500;
 
 	// Prop
 	public static var essence_pos_variance: Float = 64;
 	public static var essence_scale_min: Float = 0.2;
 	public static var essence_scale_max: Float = 1;
+
+	public static var essence_direction_variance: Float = Math.PI/8;
+	public static var essence_splash_amt_min: Int = 15;
+	public static var essence_splash_amt_max: Int = 25;
+	public static var essence_splash_dist_figure: Int = 64;
 
 
 	public static var body_armlet: Array<nape.geom.Vec2> = Polygon.box( 64, 5);

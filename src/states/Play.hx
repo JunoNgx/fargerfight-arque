@@ -111,8 +111,30 @@ class Play extends State {
 				_e.pos.y + Luxe.utils.random.float(-C.essence_pos_variance, C.essence_pos_variance)
 			);
 			var newscale = Luxe.utils.random.float(C.essence_scale_min, C.essence_scale_max);
-			
+
 			var ess = new Essence(newpos, new Vector(newscale, newscale));
+		});
+
+		Luxe.events.listen('effect.essence.splash', function(_e: EffectEvent) {
+			var amt = Luxe.utils.random.int(C.essence_splash_amt_min, C.essence_splash_amt_max);
+
+			for (i in 0...amt) {
+				// Base stat which will determine essence's size and distance from source
+				var stat = Luxe.utils.random.float(1, 5);
+
+				var newscale_vec = new Vector(1/stat, 1/stat);
+
+				// All to determine the randomized position of the essence drop
+				// nape.phys.body.rotation is already in radian
+				var newdirection = _e.direction + Luxe.utils.random.float(-C.essence_direction_variance, C.essence_direction_variance);
+				// var radian = newdirection * Math.PI / 180;
+				var newpos = new Vector(
+					_e.pos.x + C.essence_splash_dist_figure * Math.cos(newdirection) * stat,
+					_e.pos.y + C.essence_splash_dist_figure * Math.sin(newdirection) * stat
+				);
+
+				var ess = new Essence(newpos, newscale_vec);
+			}
 		});
 
 	}
@@ -148,7 +170,7 @@ class Play extends State {
 		// spark.flash(e.pos);
 		// Luxe.events.fire('effect.spark', {pos: e.pos});
 		// Luxe.events.fire('effect.explosion', {pos: e.pos});
-		Luxe.events.fire('effect.essence.drip', {pos: e.pos});
+		// Luxe.events.fire('effect.essence.drip', {pos: e.pos});
 	}
 
 	override function onkeyup( e:KeyEvent ) {

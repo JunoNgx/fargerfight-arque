@@ -44,7 +44,7 @@ class ShardPhys extends Component {
 		// Debug drawer
 		if(states.Play.drawer != null) states.Play.drawer.add(body);
 
-		//Collision callback
+		//Collision callbacks
 		hitFargerCallback = new InteractionListener(CbEvent.BEGIN, InteractionType.COLLISION,
 			PhysTypes.shard,
 			PhysTypes.farger,
@@ -68,7 +68,11 @@ class ShardPhys extends Component {
 	}
 
 	function hitFarger(callback: InteractionCallback) {
-		// TODO Bloodsplash based on this one's rotation
+		// Essence splash based on this instance's position and rotation
+		if(callback.int1.castBody.id == body.id) {
+			// Luxe.events.fire('effect.essence.splash', {pos: new Vector(this.body.position.x, this.body.position.y), direction: -this.body.rotation});
+
+		}
 		hostDestroy();
 	}
 
