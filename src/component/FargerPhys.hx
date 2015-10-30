@@ -29,10 +29,11 @@ class FargerPhys extends ArmBase {
 			body.applyImpulse(new Vec2(force * Math.cos(angle), force * Math.sin(angle)), body.position);
 
 			// BUG: very random direction of force
-			// BUG: Azur not hit by shard, only Odeo
 			// TODO if (hp == 1) force = 5000;
 
+			// Splash essence base the other body ```callback.int2```
 			Luxe.events.fire('effect.essence.splash', {pos: new Vector(this.body.position.x, this.body.position.y), direction: -callback.int2.castBody.rotation});
+			host.bleed(1.2);
 		}
 
 		// TODO Slowmo

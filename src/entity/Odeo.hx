@@ -24,7 +24,7 @@ class Odeo extends PlayerBase {
 		phys = new component.FargerPhys({
 			name: 'physic',
 			shape: C.body_farger,
-			cbType: PhysTypes.armlet,
+			cbType: PhysTypes.farger,
 			x: 0.75, y: 0.5, rot: -Math.PI
 		});
 		this.add(phys);

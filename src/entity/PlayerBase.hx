@@ -34,6 +34,8 @@ class PlayerBase extends Sprite {
 		this.barrel = new Vector();
 		this.fire_cooldown = C.fire_cooldown;
 
+		this.add(new component.Bloodbag());
+
 		// Important lines that create joints/constraints for components
 		joinEquipments(); // Equip all armpieces using joinEquipments()
 	}
@@ -110,6 +112,10 @@ class PlayerBase extends Sprite {
 			// Luxe.audio.play('notreadytofire');
 		}
 		
+	}
+
+	public function bleed(_time: Float) {
+		this.get('bloodbag').bleeding_time = _time;
 	}
 
 }

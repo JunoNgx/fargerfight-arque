@@ -62,7 +62,7 @@ class ArmBase extends Component {
 		if(states.Play.drawer != null) states.Play.drawer.add(body);
 
 		hitShardListener = new InteractionListener( CbEvent.BEGIN, InteractionType.COLLISION,
-			PhysTypes.armlet,
+			[PhysTypes.armlet, PhysTypes.farger, PhysTypes.arquen, PhysTypes.shield],
 			PhysTypes.shard,
 			hitShard
 		);

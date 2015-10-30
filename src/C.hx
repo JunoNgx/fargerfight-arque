@@ -22,7 +22,7 @@ class C {
 	// Prop
 	public static var essence_pos_variance: Float = 64;
 	public static var essence_scale_min: Float = 0.2;
-	public static var essence_scale_max: Float = 1;
+	public static var essence_scale_max: Float = 0.6;
 
 	public static var essence_direction_variance: Float = Math.PI/8;
 	public static var essence_splash_amt_min: Int = 15;
