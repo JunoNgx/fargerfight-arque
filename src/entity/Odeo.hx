@@ -18,7 +18,7 @@ class Odeo extends PlayerBase {
 	override public function new() {
 		super({
 			name: 'odeo',
-			depth: -10,
+			depth: -2,
 		});
 
 		phys = new component.FargerPhys({

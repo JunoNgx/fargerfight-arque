@@ -21,6 +21,8 @@ import luxe.physics.nape.DebugDraw;
 
 import particle.Spark;
 import particle.Explosion;
+import prop.Essence;
+
 import C;
 
 class Play extends State {
@@ -103,6 +105,16 @@ class Play extends State {
 			demom.flash(_e.pos, _e.direction);
 		});
 
+		Luxe.events.listen('effect.essence.drip', function(_e: EffectEvent) {
+			var newpos = new Vector( // Create a new vector with randomized variances
+				_e.pos.x + Luxe.utils.random.float(-C.essence_pos_variance, C.essence_pos_variance),
+				_e.pos.y + Luxe.utils.random.float(-C.essence_pos_variance, C.essence_pos_variance)
+			);
+			var newscale = Luxe.utils.random.float(C.essence_scale_min, C.essence_scale_max);
+			
+			var ess = new Essence(newpos, new Vector(newscale, newscale));
+		});
+
 	}
 
 	override public function update(dt: Float) {
@@ -135,7 +147,8 @@ class Play extends State {
 	override public function onmousedown(e: MouseEvent) {
 		// spark.flash(e.pos);
 		// Luxe.events.fire('effect.spark', {pos: e.pos});
-		Luxe.events.fire('effect.explosion', {pos: e.pos});
+		// Luxe.events.fire('effect.explosion', {pos: e.pos});
+		Luxe.events.fire('effect.essence.drip', {pos: e.pos});
 	}
 
 	override function onkeyup( e:KeyEvent ) {

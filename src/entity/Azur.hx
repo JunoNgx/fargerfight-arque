@@ -22,7 +22,7 @@ class Azur extends PlayerBase {
 		super({
 			name: 'azur',
 			// debug only
-			depth: -10
+			depth: -2
 		});
 
 		phys = new component.FargerPhys({
