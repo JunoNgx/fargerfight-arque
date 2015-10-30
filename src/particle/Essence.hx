@@ -10,7 +10,7 @@ class Essence extends ParticleSystem { // read "blood", I'm just trying to be hi
 	
 	override public function new() {
 		super({
-			name: 'part.essence',
+			name: 'main',
 			name_unique: true,
 		});
 

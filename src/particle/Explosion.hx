@@ -9,7 +9,7 @@ class Explosion extends PartBase {
 
 		override public function new() {
 		super({
-			name: 'part.explosion',
+			name: 'main',
 			name_unique: true,
 		});
 

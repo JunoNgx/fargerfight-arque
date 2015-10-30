@@ -1,6 +1,6 @@
 package entity;
 
-import luxe.Visual;
+import luxe.Sprite;
 import luxe.Color;
 import luxe.Vector;
 
@@ -10,7 +10,7 @@ import component.ShardPhys;
 
 import C;
 
-class Shard extends Visual {
+class Shard extends Sprite {
 
 	public var phys: ShardPhys;
 
@@ -23,6 +23,7 @@ class Shard extends Visual {
 			name: 'shard',
 			name_unique: true,
 			// visible: false,
+			depth: -3,
 		});
 
 		phys = new ShardPhys();

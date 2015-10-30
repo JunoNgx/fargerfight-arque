@@ -1,6 +1,6 @@
 package entity;
 
-import luxe.Visual;
+import luxe.Sprite;
 import luxe.Vector;
 import luxe.Color;
 
@@ -15,7 +15,7 @@ import nape.constraint.WeldJoint;
 
 import C;
 
-class PlayerBase extends Visual {
+class PlayerBase extends Sprite {
 
 	public var hp: Int = 3;
 	public var alive: Bool = true;

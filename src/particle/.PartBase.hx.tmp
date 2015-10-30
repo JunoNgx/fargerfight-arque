@@ -7,9 +7,9 @@ import luxe.Particles;
 // Base class for particle systems in this game
 class PartBase extends ParticleSystem {
 	
-	public function flash(_pos: Vector, ?_direction: Float) {
+	public function flash(_pos: Vector, ?_dir: Float) {
 		this.pos = _pos;
-		if (_direction != null) this.emitters.get('main').direction = _direction;
+		if (_dir != null) this.
 
 		this.start(0.01);
 	}
