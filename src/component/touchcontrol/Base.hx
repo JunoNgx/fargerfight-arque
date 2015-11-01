@@ -10,6 +10,9 @@ import C;
 
 class Base extends Component {
 
+	// BUG: touch control not working separately
+	// TODO: check for touch.id in ontouchmove
+
 	public var isActive: Bool = false;
 	public var lastPress: Float;
 
