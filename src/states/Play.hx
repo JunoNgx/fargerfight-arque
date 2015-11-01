@@ -98,11 +98,11 @@ class Play extends State {
 
 	function setupEvents(){
 		Luxe.events.listen('effect.spark', function(_e: EffectEvent) {
-			spark.flash(_e.pos, _e.direction);
+			spark.flash(_e.pos); // _e.direction == null
 		});
 
 		Luxe.events.listen('effect.explosion', function(_e: EffectEvent) {
-			demom.flash(_e.pos, _e.direction);
+			demom.flash(_e.pos);
 		});
 
 		Luxe.events.listen('effect.essence.drip', function(_e: EffectEvent) {
