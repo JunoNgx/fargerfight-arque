@@ -116,6 +116,8 @@ class Play extends State {
 		});
 
 		Luxe.events.listen('effect.essence.splash', function(_e: EffectEvent) {
+			// _e.direction is taken as a radian
+
 			var amt = Luxe.utils.random.int(C.essence_splash_amt_min, C.essence_splash_amt_max);
 
 			for (i in 0...amt) {

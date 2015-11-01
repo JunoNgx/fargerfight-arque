@@ -23,7 +23,7 @@ class Bloodbag extends Component {
 		// continuously and randomly drips essence
 		if (bleeding_time > 0) {
 			bleeding_time -= dt;
-			if (Luxe.utils.random.sign(0.3) == 1) Luxe.events.fire('effect.essence.drip', {pos: entity.pos});
+			if (Luxe.utils.random.sign(0.3) == 1) Luxe.events.fire('effect.essence.drip', {pos: entity.pos}); // performed by states.Play.hx
 		}
 	}
 
