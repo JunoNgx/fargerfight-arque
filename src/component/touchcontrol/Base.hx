@@ -10,11 +10,9 @@ import C;
 
 class Base extends Component {
 
-	// BUG: touch control not working separately
-	// TODO: check for touch.id in ontouchmove
-
 	public var isActive: Bool = false;
 	public var lastPress: Float;
+	public var touchid: Int = 9999;
 
 	override public function new () {
 		super({
@@ -28,10 +26,12 @@ class Base extends Component {
 		isActive = true;
 		if ((Luxe.time - lastPress) < C.double_tap) fire();
 		lastPress = Luxe.time;
+		touchid = e.touch_id;
 	}
 
 	override public function ontouchmove(e: TouchEvent) {
 		if (!isActive) return;
+		if (touchid != e.touch_id) return;
 
 		var host: entity.PlayerBase = cast entity;
 		host.phys.body.applyImpulse(new nape.geom.Vec2(e.dx * Main.w * C.force_multiplier, e.dy * Main.w * C.force_multiplier), host.phys.body.position);
@@ -45,6 +45,7 @@ class Base extends Component {
 
 	override public function ontouchup(e: TouchEvent) {
 		isActive = false;
+		touchid = 9999;
 
 		var host: entity.PlayerBase = cast entity;
 		host.phys.body.applyImpulse(new nape.geom.Vec2(0, 0), host.phys.body.position);
