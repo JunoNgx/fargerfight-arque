@@ -55,4 +55,13 @@ class FargerPhys extends ArmBase {
 		host.pos = new Vector( body.position.x, body.position.y);
 		host.radians = body.rotation;
 	}
+
+	public function shaken() {
+	// apply an impulse to main body for enhanced feedback
+	// called when farger dies
+		var angle: Float = Luxe.utils.random.float(-Math.PI * 2, Math.PI * 2);
+		var force: Float = 4000;
+
+		body.applyImpulse(new Vec2(force * Math.cos(angle), force * Math.sin(angle)), body.position);
+	}
 }

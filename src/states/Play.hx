@@ -36,6 +36,8 @@ class Play extends State {
 	public static var spark: particle.Spark;
 	public static var demom: particle.Explosion;
 
+	public static var lastDeath: Float = 0; // last death of an farger, to check for draw
+
 	var azur: entity.Azur; // Left fighter
 	var odeo: entity.Odeo; // Right fighter
 
@@ -139,6 +141,52 @@ class Play extends State {
 			}
 		});
 
+		Luxe.events.listen('effect.essence.splash.heavy', function(_e: EffectEvent) {
+			// _e.direction is taken as a radian
+
+			var amt = Luxe.utils.random.int(C.essence_splash_heavy_amt_min, C.essence_splash_heavy_amt_max);
+
+			for (i in 0...amt) { // refer to above events for more details
+				var stat = Luxe.utils.random.float(0.5, 7);
+				var newscale_vec = new Vector(1/stat, 1/stat);
+				var direction = Luxe.utils.random.float(-Math.PI * 2, Math.PI * 2); // covers 360 degrees
+				var newpos = new Vector(
+					_e.pos.x + C.essence_splash_dist_figure * Math.cos(direction) * stat,
+					_e.pos.y + C.essence_splash_dist_figure * Math.sin(direction) * stat
+				);
+
+				var ess = new Essence(newpos, newscale_vec);
+			}
+		});
+
+		// Ending
+		Luxe.events.listen('azur.died', function(e){
+			// TODO flash text
+			// TODO enable end state
+
+			CheckForDraw();
+			lastDeath = Luxe.time;
+		});
+
+		Luxe.events.listen('odeo.died', function(e){
+			// TODO flash text
+			// TODO enable end state
+
+			CheckForDraw();
+			lastDeath = Luxe.time;
+		});
+
+		Luxe.events.listen('arque!', function(e){
+			// TODO flash text separately ARQUE
+		});
+
+	}
+
+	function CheckForDraw() {
+		if (lastDeath != 0) return;
+		if ((Luxe.time - lastDeath) > 1.5) {
+			//TODO flash text Draw
+		}
 	}
 
 	override public function update(dt: Float) {

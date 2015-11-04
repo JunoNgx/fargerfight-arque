@@ -11,6 +11,8 @@ class C {
 
 	// Impact forces upon breakage of joints
 	public static var if_armlet: Float = 700;
+	public static var if_armbase: Float = 800; // for shield and arquen upon death
+	public static var if_angular_multiplier: Float = 3;
 
 	public static var fire_cooldown: Float = 0.75;
 	public static var barrel_length: Float = 128;
@@ -28,6 +30,9 @@ class C {
 	public static var essence_splash_amt_min: Int = 15;
 	public static var essence_splash_amt_max: Int = 25;
 	public static var essence_splash_dist_figure: Int = 64;
+
+	public static var essence_splash_heavy_amt_min: Int = 50;
+	public static var essence_splash_heavy_amt_max: Int = 100;
 
 
 	public static var body_armlet: Array<nape.geom.Vec2> = Polygon.box( 64, 5);

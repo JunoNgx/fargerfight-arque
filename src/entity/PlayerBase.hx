@@ -13,6 +13,7 @@ import nape.phys.Body;
 import nape.geom.Vec2;
 import nape.constraint.WeldJoint;
 
+import PhysTypes;
 import C;
 
 class PlayerBase extends Sprite {
@@ -38,6 +39,7 @@ class PlayerBase extends Sprite {
 
 		// Important lines that create joints/constraints for components
 		joinEquipments(); // Equip all armpieces using joinEquipments()
+		setupEvents(); // Start listening to events which will detach joints when needed
 	}
 
 	function joinEquipments() {
@@ -46,6 +48,100 @@ class PlayerBase extends Sprite {
 		this.joint_sh = equipArmor(this.get('shield'), 0);
 		this.joint_aq = equipArmor(this.get('arquen'), 0);
 	}
+
+	function setupEvents() {
+		this.events.listen('detach.joint_lt', detach_left);
+		this.events.listen('detach.joint_rt', detach_right);
+
+		this.events.listen('die', function(_e: DetachEvent) { // this event is similar to the hit event in component.FargerPhys
+
+			Luxe.timescale = 0.001; // Simulate the termporarily paused game effect by setting Luxe.timescale to a near zero
+			trace('timescale semi-frozen'); 
+			Luxe.timer.schedule(0.8, function(){ // Restore timescale in 0.8 seconds
+				Luxe.timescale = 1;
+
+				// Remove all joints (and disable all cbTypes as well)
+				this.events.fire('detach.joint_lt');
+				this.events.fire('detach.joint_rt');
+				this.detach(this.get('shield'));
+				this.detach(this.get('arquen'));
+
+				// remove collision detection for main body
+				var farger: component.FargerPhys = cast this.get('physic');
+				farger.body.cbTypes.remove(PhysTypes.farger);
+				// move the main body for enhanced feedback
+				farger.shaken();
+
+				// blood splash is handled by component.Arquen;
+
+				// farger can no longer be controlled
+				this.remove('controller');
+
+				this.alive = false;
+				this.hp = 0;
+				Luxe.camera.shake(20);
+
+				// send signal to game engine to determine who dies and who wins
+				Luxe.events.fire(this.name + '.died');
+			});
+		});
+	}
+
+	function detach_left(_e: DetachEvent) {
+		var armlet: component.Armlet = this.get('armlet_lt');
+
+		if (!armlet.detached) {
+			Luxe.camera.shake(10);
+			armlet.detached = true;
+			armlet.body.cbTypes.remove( PhysTypes.armlet); // no longer an attached armlet, now just a normal and random body on the field
+
+			// Enhance feedback by applying a force upon detachment
+			// the armlet remain will fly around for a while
+			// might (randomly) affect farger if direction is against it
+			var dir = Luxe.utils.random.float(Math.PI*2);
+			armlet.body.applyImpulse(new Vec2(C.if_armlet * Math.cos(dir), C.if_armlet * Math.sin(dir)), armlet.body.position);
+			armlet.body.angularVel = Luxe.utils.random.float(-Math.PI * C.if_angular_multiplier, Math.PI * C.if_angular_multiplier);
+			// Removal of constraint/joint
+			this.joint_lt.active = false;
+		}
+	}
+
+	function detach_right(_e: DetachEvent) {
+		var armlet: component.Armlet = this.get('armlet_rt');
+
+		if (!armlet.detached) {
+			Luxe.camera.shake(10);
+			armlet.detached = true;
+			armlet.body.cbTypes.remove( PhysTypes.armlet); // no longer an attached armlet, now just a normal and random body on the field
+
+			// Enhance feedback by applying a force upon detachment
+			// the armlet remain will fly around for a while
+			// might (randomly) affect farger if direction is against it
+			var dir = Luxe.utils.random.float(Math.PI*2);
+			armlet.body.applyImpulse(new Vec2(C.if_armlet * Math.cos(dir), C.if_armlet * Math.sin(dir)), armlet.body.position);
+			armlet.body.angularVel = Luxe.utils.random.float(-Math.PI * C.if_angular_multiplier, Math.PI * C.if_angular_multiplier);
+
+			// Removal of constraint/joint
+			this.joint_rt.active = false;
+		}	
+	}
+
+	// This is just used to detach arquen and shield upon farger's death
+	function detach(_arm: component.ArmBase) {
+		_arm.detached = true;
+
+		var dir = Luxe.utils.random.float(Math.PI*2);
+		_arm.body.applyImpulse(new Vec2(C.if_armbase * Math.cos(dir), C.if_armlet * Math.sin(dir)), _arm.body.position);
+		_arm.body.angularVel = Luxe.utils.random.float(-Math.PI * C.if_angular_multiplier, Math.PI * C.if_angular_multiplier);
+
+		if (_arm.name == 'shield') {
+			_arm.body.cbTypes.remove( PhysTypes.shield); 
+			this.joint_sh.active = false;
+		} else {
+			_arm.body.cbTypes.remove( PhysTypes.arquen);
+			this.joint_aq.active = false;
+		}
+	}	
 
 	// Create a joint/constraint with a component.ArmBase
 	// (all of whom Farger's components are based on)
@@ -118,4 +214,8 @@ class PlayerBase extends Sprite {
 		this.get('bloodbag').bleeding_time = _time;
 	}
 
+}
+
+typedef DetachEvent = {
+	direction: Float
 }
