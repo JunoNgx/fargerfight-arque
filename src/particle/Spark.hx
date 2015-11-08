@@ -12,7 +12,7 @@ class Spark extends PartBase {
 	
 	override public function new() {
 		super({
-			name: 'part.spark',
+			name: 'main',
 			name_unique: true,
 		});
 

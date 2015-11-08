@@ -35,6 +35,7 @@ class Play extends State {
 
 	public static var spark: particle.Spark;
 	public static var demom: particle.Explosion;
+	public static var essence: particle.Essence;
 
 	public static var lastDeath: Float = 0; // last death of an farger, to check for draw
 
@@ -95,6 +96,7 @@ class Play extends State {
 		// spark.stop();
 
 		demom = new particle.Explosion();
+		essence = new particle.Essence();
 		// demom.stop();
 	}
 
@@ -105,6 +107,10 @@ class Play extends State {
 
 		Luxe.events.listen('effect.explosion', function(_e: EffectEvent) {
 			demom.flash(_e.pos);
+		});
+
+		Luxe.events.listen('effect.essence', function(_e: EffectEvent) {
+			essence.flash(_e.pos);
 		});
 
 		Luxe.events.listen('effect.essence.drip', function(_e: EffectEvent) {

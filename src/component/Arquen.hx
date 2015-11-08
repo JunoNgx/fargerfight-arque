@@ -19,6 +19,8 @@ class Arquen extends ArmBase {
 			host.events.fire('die');
 			Luxe.events.fire('arque!');
 
+			Luxe.events.fire('effect.essence', {pos: new Vector(this.body.position.x, this.body.position.y)});
+
 			Luxe.events.fire('effect.essence.splash.heavy', {pos: new Vector(this.body.position.x, this.body.position.y)});
 			host.bleed(1.2);
 
