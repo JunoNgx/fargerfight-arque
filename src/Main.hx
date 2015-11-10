@@ -50,10 +50,26 @@ class Main extends luxe.Game {
 
 		state.add (new states.Play({name: 'play'}));
 		state.add (new states.Menu({name: 'menu'}));
+		state.add (new states.End({name: 'end'}));
 		state.add (new states.Splash({name: 'splash'}));
 
 		state.set(initialState);
 
+		setupEvents();
 	}
 
+	public function setupEvents() {
+
+		Luxe.events.listen('game.ends', function(_e: EndEvent){
+			state.enable('end');
+		}); 
+
+	}
+
+}
+
+typedef EndEvent = {
+	arque: Bool,
+	draw: Bool,
+	azurwins: Bool
 }
