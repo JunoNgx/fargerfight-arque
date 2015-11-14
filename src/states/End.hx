@@ -13,11 +13,25 @@ import C;
 
 class End extends State {
 	
-	public static var result: luxe.Text;
+	var result: luxe.Text;
+	var replay: luxe.Sprite;
 
 	public function onenable <T> (_data:T) {
-		var argsData: EndEvent = cast _data;
 
+		result = new Text ({
+			name: 't.result',
+			pos: new Vector(Main.w * 0.5, Main.h * 0.5),
+			align: center
+		});
+
+		replay = new Sprite ({
+			name: 'b.replay',
+			pos: new Vector (Main.w * 0.5, Main.h * 0.75),
+			size: new Vector (128, 128),
+		});
+
+
+		var argsData: EndEvent = cast _data;
 		if (argsData.arque) {
 			result.text = 'Arque!';
 		} else if (argsData.draw) {
@@ -31,7 +45,15 @@ class End extends State {
 	}
 
 	public function ondisable <T> (_:T) {
+		result.destroy();
+		replay.destroy();
+	}
 
+	override function onmousedown(e: MouseEvent) {
+		if (replay.point_inside(Luxe.camera.screen_point_to_world(e.pos))) {
+			Main.state.disable('end');
+			Main.state.set('play');
+		}
 	}
 
 }
