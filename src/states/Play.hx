@@ -101,6 +101,9 @@ class Play extends State {
 	}
 
 	function setupEvents(){
+
+		// camera shake is performed from entity.PlayerBase
+
 		Luxe.events.listen('effect.spark', function(_e: EffectEvent) {
 			spark.flash(_e.pos); // _e.direction == null
 		});
@@ -170,6 +173,12 @@ class Play extends State {
 			// TODO flash text
 			// TODO enable end state
 
+			if (odeo.alive) {
+				Main.state.enable('end', {azurwins: true, draw: false, arque: false});
+			} else { // both players are dead
+				Main.state.enable('end', {draw: true, azurwins: false, arque: false});
+			}			
+
 			CheckForDraw();
 			lastDeath = Luxe.time;
 		});
@@ -178,12 +187,20 @@ class Play extends State {
 			// TODO flash text
 			// TODO enable end state
 
+			if (odeo.alive) {
+				Main.state.enable('end', {azurwins: false, draw: false, arque: false});
+			} else { // both players are dead
+				Main.state.enable('end', {draw: true, azurwins: false, arque: false});
+			}			
+
 			CheckForDraw();
 			lastDeath = Luxe.time;
 		});
 
 		Luxe.events.listen('arque!', function(e){
 			// TODO flash text separately ARQUE
+
+			Main.state.enable('end', {arque: true, draw: false, azurwins: false});
 		});
 
 	}

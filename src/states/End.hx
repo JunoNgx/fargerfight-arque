@@ -21,7 +21,8 @@ class End extends State {
 		result = new Text ({
 			name: 't.result',
 			pos: new Vector(Main.w * 0.5, Main.h * 0.5),
-			align: center
+			align: center,
+			point_size: 96,
 		});
 
 		replay = new Sprite ({

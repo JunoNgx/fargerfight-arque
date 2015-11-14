@@ -22,7 +22,7 @@ class Menu extends State {
 		title = new Text({
 			name: 't.title',
 			text: 'Fargerfight Arque',
-			pos: new Vector(Main.w * 0.5, Main.h * 0.2),
+			pos: new Vector(Main.w * 0.5, Main.h * 0.1),
 			point_size: 128,
 			align: center
 		});

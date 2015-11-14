@@ -79,10 +79,11 @@ class PlayerBase extends Sprite {
 
 				this.alive = false;
 				this.hp = 0;
-				Luxe.camera.shake(20);
+				Luxe.camera.shake(80);
 
 				// send signal to game engine to determine who dies and who wins
 				Luxe.events.fire(this.name + '.died');
+				trace(this.name + '.died');
 			});
 		});
 	}
