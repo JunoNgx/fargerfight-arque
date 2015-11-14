@@ -200,7 +200,8 @@ class Play extends State {
 	}
 
 	override public function onleave<T> (_:T) {
-
+		Luxe.scene.empty();
+		drawer.destroy();
 	}
 
 
@@ -230,11 +231,13 @@ class Play extends State {
 	}
 
 	override function onkeyup( e:KeyEvent ) {
-		if(e.keycode == Key.escape) {
+		if(e.keycode == Key.space) {
 			// Luxe.shutdown();
 
-			azur.joint_lt.active = false;
-			trace ('space');
+			// azur.joint_lt.active = false;
+			// trace ('space');
+
+			Main.state.set('play');
 		}
 	}
 }

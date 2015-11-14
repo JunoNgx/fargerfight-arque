@@ -15,14 +15,14 @@ class End extends State {
 	
 	public static var result: luxe.Text;
 
-	override public function onenable <T> (_data:T) {
+	public function onenable <T> (_data:T) {
 		var argsData: EndEvent = cast _data;
 
 		if (argsData.arque) {
 			result.text = 'Arque!';
 		} else if (argsData.draw) {
 			result.text = 'Draw';
-		} else if (argsData.win) {
+		} else if (argsData.azurwins) {
 			result.text = 'Azur wins';
 		} else {
 			result.text = 'Odeo wins';			
@@ -30,8 +30,14 @@ class End extends State {
 
 	}
 
-	override public function ondisable <T> (_:T) {
+	public function ondisable <T> (_:T) {
 
 	}
 
+}
+
+typedef EndEvent = {
+	arque: Bool,
+	draw: Bool,
+	azurwins: Bool
 }

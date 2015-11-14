@@ -7,9 +7,13 @@ import luxe.Color;
 import luxe.Vector;
 import luxe.Camera;
 
+import luxe.Text;
+
 import C;
 
 class Menu extends State {
+
+	var title: Text;
 
 	override public function onenabled <T> (_:T) {
 
