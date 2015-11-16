@@ -80,6 +80,8 @@ class End extends State {
 
 		Luxe.events.unlisten('end.draw');
 		Luxe.events.unlisten('end.arque');
+
+		Luxe.scene.empty();
 	}
 
 	override function onmousedown(e: MouseEvent) {

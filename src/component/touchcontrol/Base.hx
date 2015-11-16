@@ -23,6 +23,8 @@ class Base extends Component {
 #if mobile
 
 	override public function ontouchdown(e: TouchEvent) {
+		if (Main.state.enabled('menu')) return; // no input towards fargers is allowed while game is still in main menu (not started yet)
+
 		isActive = true;
 		if ((Luxe.time - lastPress) < C.double_tap) fire();
 		lastPress = Luxe.time;
@@ -58,6 +60,8 @@ class Base extends Component {
 
 	override public function onmousedown(e: MouseEvent) {
 		// if (e.x < Main.w/2) isActive = true;
+
+		if (Main.state.enabled('menu')) return;
 
 		isActive = true;
 		if ((Luxe.time - lastPress) < 0.3) fire();
