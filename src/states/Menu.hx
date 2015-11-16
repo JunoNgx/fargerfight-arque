@@ -21,6 +21,7 @@ class Menu extends State {
 	override public function onenabled <T> (_:T) {
 		title = new Text({
 			name: 't.title',
+			name_unique: true,
 			text: 'Fargerfight Arque',
 			pos: new Vector(Main.w * 0.5, Main.h * 0.1),
 			point_size: 128,
@@ -29,12 +30,14 @@ class Menu extends State {
 
 		playButton = new Sprite ({
 			name: 'b.play',
+			name_unique: true,
 			size: new Vector (128, 128),
 			pos: new Vector (Main.w * 0.5, Main.h * 0.5),
 		});
 
 		instruction = new Text({
 			name: 't.instruction',
+			name_unique: true,
 			text: 'on each half of the screen \n swipe to move // double tap to fire',
 			pos: new Vector(Main.w * 0.5, Main.h * 0.7),
 			// point_size: 128,
@@ -43,6 +46,7 @@ class Menu extends State {
 
 		copyright = new Text({
 			name: 't.copyright',
+			name_unique: true,
 			text: '2016 Aureoline Tetrahedron',
 			pos: new Vector(Main.w * 0.5, Main.h * 0.9),
 			// point_size: 128,

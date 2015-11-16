@@ -21,6 +21,7 @@ class End extends State {
 
 		result = new Text ({
 			name: 't.result',
+			name_unique: true, // to prevent this from being trapped in limbo with another of the same name, since many will be created in one session
 			pos: new Vector(Main.w * 0.5, Main.h * 0.3),
 			text: 'result',
 			align: center,
@@ -30,6 +31,7 @@ class End extends State {
 
 		arque = new Text ({
 			name: 't.arque',
+			name_unique: true,
 			pos: new Vector(Main.w * 0.5, Main.h * 0.5),
 			text: 'arque!',
 			align: center,
@@ -40,6 +42,7 @@ class End extends State {
 
 		replay = new Sprite ({
 			name: 'b.replay',
+			name_unique: true,
 			pos: new Vector (Main.w * 0.5, Main.h * 0.7),
 			size: new Vector (128, 128),
 		});
@@ -81,7 +84,7 @@ class End extends State {
 		Luxe.events.unlisten('end.draw');
 		Luxe.events.unlisten('end.arque');
 
-		Luxe.scene.empty();
+		// Luxe.scene.empty();
 	}
 
 	override function onmousedown(e: MouseEvent) {
