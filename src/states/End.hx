@@ -29,24 +29,12 @@ class End extends State {
 			point_size: 96,
 		});
 
-		arque = new Text ({
-			name: 't.arque',
-			name_unique: true,
-			pos: new Vector(Main.w * 0.5, Main.h * 0.5),
-			text: 'arque!',
-			align: center,
-			align_vertical: center,
-			point_size: 96,
-			visible: false, // important
-		});
-
 		replay = new Sprite ({
 			name: 'b.replay',
 			name_unique: true,
 			pos: new Vector (Main.w * 0.5, Main.h * 0.7),
 			size: new Vector (128, 128),
 		});
-
 
 		var argsData: EndEvent = cast _data;
 		// if (argsData.arque) {
@@ -65,14 +53,25 @@ class End extends State {
 			result.text = 'odeo wins';
 		}
 
+		arque = new Text ({
+			name: 't.arque',
+			name_unique: true,
+			pos: new Vector(Main.w * 0.5, Main.h * 0.5),
+			text: 'arque!',
+			align: center,
+			align_vertical: center,
+			point_size: 96,
+			visible: argsData.arque, // important
+		});
+
 		Luxe.events.listen('end.draw', function (e) {
 			result.text = 'draw';
 		});
 
-		Luxe.events.listen('end.arque', function (e){
-			// result.text = 'arque!';
-			arque.visible = true;
-		});
+		// Luxe.events.listen('end.arque', function (e){
+		// 	// result.text = 'arque!';
+		// 	arque.visible = true;
+		// });
 
 	}
 

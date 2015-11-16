@@ -38,6 +38,7 @@ class Play extends State {
 	public static var essence: particle.Essence;
 
 	public static var lastDeath: Float; // last death of an farger, to check for draw
+	public static var arqueAchieved: Bool;
 
 	var azur: entity.Azur; // Left fighter
 	var odeo: entity.Odeo; // Right fighter
@@ -48,6 +49,7 @@ class Play extends State {
         Luxe.physics.nape.debugdraw = drawer;
 
         lastDeath = 0;
+        arqueAchieved = false;
 
 		setupWorld();
 		spawnPlayers();
@@ -181,7 +183,7 @@ class Play extends State {
 			// 	Main.state.enable('end', {draw: true, azurwins: false, arque: false});
 			// }			
 
-			Main.state.enable('end', {azurwins: false});
+			Main.state.enable('end', {azurwins: false, arque: arqueAchieved});
 			CheckForDraw(); // if the other is already dead within the timeframe, 'draw' text is drawn
 			lastDeath = Luxe.time;
 		});
@@ -196,7 +198,7 @@ class Play extends State {
 			// 	Main.state.enable('end', {draw: true, azurwins: false, arque: false});
 			// }			
 
-			Main.state.enable('end', {azurwins: true});
+			Main.state.enable('end', {azurwins: true, arque: arqueAchieved});
 			CheckForDraw();
 			lastDeath = Luxe.time;
 		});
@@ -206,6 +208,11 @@ class Play extends State {
 
 		// 	Main.state.enable('end', {arque: true, draw: false, azurwins: false});
 		// });
+
+		Luxe.events.listen('arque!', function (e){
+			// states.End.arque.visible = true;
+			arqueAchieved = true;
+		});
 
 	}
 
