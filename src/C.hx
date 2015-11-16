@@ -15,11 +15,12 @@ class C {
 	public static var if_angular_multiplier: Float = 3;
 
 	public static var fire_cooldown: Float = 0.75;
-	public static var barrel_length: Float = 128;
+	public static var barrel_length: Float = 80;
+	public static var barrel_angle: Float = 0.21; // angle multiplier
 
-	public static var shard_radius: Float = 20;
+	public static var shard_radius: Float = 10;
 	public static var shard_lifetime: Float = 10;
-	public static var shard_speed: Float = 500;
+	public static var shard_speed: Float = 100; // impulse/force being applied on shard upon being fired
 
 	// Prop
 	public static var essence_pos_variance: Float = 64;

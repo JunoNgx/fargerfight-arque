@@ -181,8 +181,8 @@ class PlayerBase extends Sprite {
 
 	override public function update(dt: Float) {
 		
-		barrel.x = this.pos.x + C.barrel_length * Math.cos(this.radians + Math.PI * 11/28);
-		barrel.y = this.pos.y + C.barrel_length * Math.sin(this.radians + Math.PI * 11/28);
+		barrel.x = this.pos.x + C.barrel_length * Math.cos(this.radians + Math.PI * C.barrel_angle);
+		barrel.y = this.pos.y + C.barrel_length * Math.sin(this.radians + Math.PI * C.barrel_angle);
 
 		if (this.fire_cooldown < C.fire_cooldown) this.fire_cooldown += dt;
 
@@ -207,6 +207,7 @@ class PlayerBase extends Sprite {
 			pos: this.barrel,
 			r: 3,
 			sides: 4,
+			immediate: true,
 		});
 		
 	}
