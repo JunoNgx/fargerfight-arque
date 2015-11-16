@@ -204,9 +204,7 @@ class PlayerBase extends Sprite {
 		});
 
 		Luxe.draw.ngon({
-			pos: this.barrel,
-			r: 3,
-			sides: 4,
+			pos: this.
 		});
 		
 	}

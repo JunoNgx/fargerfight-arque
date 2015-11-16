@@ -37,7 +37,7 @@ class Play extends State {
 	public static var demom: particle.Explosion;
 	public static var essence: particle.Essence;
 
-	public static var lastDeath: Float; // last death of an farger, to check for draw
+	public static var lastDeath: Float = 0; // last death of an farger, to check for draw
 
 	var azur: entity.Azur; // Left fighter
 	var odeo: entity.Odeo; // Right fighter
@@ -46,8 +46,6 @@ class Play extends State {
 		drawer = new DebugDraw();
 		debugText = new luxe.Text({name: 'debug', pos: new Vector(200, 20)});
         Luxe.physics.nape.debugdraw = drawer;
-
-        lastDeath = 0;
 
 		setupWorld();
 		spawnPlayers();
@@ -181,8 +179,10 @@ class Play extends State {
 			// 	Main.state.enable('end', {draw: true, azurwins: false, arque: false});
 			// }			
 
-			Main.state.enable('end', {azurwins: false});
-			CheckForDraw(); // if the other is already dead within the timeframe, 'draw' text is drawn
+			Main.state.enable('end', {azurwins: true, draw: false, arque: false});
+			if (!odeo.alive) Luxe.events.
+
+			CheckForDraw();
 			lastDeath = Luxe.time;
 		});
 
@@ -196,22 +196,24 @@ class Play extends State {
 			// 	Main.state.enable('end', {draw: true, azurwins: false, arque: false});
 			// }			
 
-			Main.state.enable('end', {azurwins: true});
+			Main.state.enable('end', {azurwins: true, draw: false, arque: false});
+			if (!azur.alive) Main.states.end
+
 			CheckForDraw();
 			lastDeath = Luxe.time;
 		});
 
-		// Luxe.events.listen('arque!', function(e){
-		// 	// TODO flash text separately ARQUE
+		Luxe.events.listen('arque!', function(e){
+			// TODO flash text separately ARQUE
 
-		// 	Main.state.enable('end', {arque: true, draw: false, azurwins: false});
-		// });
+			Main.state.enable('end', {arque: true, draw: false, azurwins: false});
+		});
 
 	}
 
 	function CheckForDraw() {
-		// if (lastDeath != 0) return;
-		if (lastDeath != 0 && (Luxe.time - lastDeath) > 1.5) {
+		if (lastDeath != 0) return;
+		if ((Luxe.time - lastDeath) > 1.5) {
 			//TODO flash text Draw
 
 			// Main.states.result.text = 'draw';
