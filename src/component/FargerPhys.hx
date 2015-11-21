@@ -7,8 +7,6 @@ import luxe.Vector;
 import nape.geom.Vec2;
 import nape.callbacks.InteractionCallback;
 
-// import luxe.tween.Actuate;
-
 import PhysTypes;
 import C;
 
@@ -31,15 +29,12 @@ class FargerPhys extends ArmBase {
 			body.applyImpulse(new Vec2(force * Math.cos(angle), force * Math.sin(angle)), body.position);
 
 			// BUG: very random direction of force
-			// TODO higher impulse is applied if farger dies
 
 			Luxe.timescale = 0.001; // Simulate the termporarily paused game effect by setting Luxe.timescale to a near zero
-			// Actuate.tween(Luxe, 0.2, {timescale: 0.001});
 			trace('timescale semi-frozen'); 
 
 			Luxe.timer.schedule(0.5, function(){ // Restore timescale in 0.5 seconds
 				Luxe.timescale = 1;
-				// Actuate.tween(Luxe, 0.2, {timescale: 1});
 				trace('timescale restored');
 
 				// Splash essence base the other body ```callback.int2``` and ```angle``` being calculated above

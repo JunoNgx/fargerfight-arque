@@ -7,6 +7,8 @@ import luxe.Vector;
 
 import C;
 
+// Component that drips blood nearby when farger is hit
+// to simulate bleeding visually
 class Bloodbag extends Component {
 
 	public var bleeding_time: Float = 0;

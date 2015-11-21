@@ -3,8 +3,6 @@ package particle;
 import luxe.Color;
 import luxe.Vector;
 
-// import luxe.Particles;
-
 import particle.PartBase;
 import C;
 

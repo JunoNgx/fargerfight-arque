@@ -4,6 +4,8 @@ import luxe.Sprite;
 import luxe.Color;
 import luxe.Vector;
 
+// Visual entities
+// drops of 'blood' spawned by component.Bloodbag when farger is hit
 class Essence extends Sprite { // Read: blood. I'm just trying to be absurdly pretentious
 
 	override public function new(_pos: Vector, _scale: Vector) {

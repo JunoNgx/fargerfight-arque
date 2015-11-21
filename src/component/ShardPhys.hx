@@ -9,10 +9,7 @@ import nape.geom.Vec2;
 import nape.phys.Body;
 import nape.phys.Material;
 import nape.phys.BodyType;
-// import nape.shape.Polygon;
 import nape.shape.Circle;
-
-// import nape.geom.Geom;
 
 import nape.callbacks.CbEvent;
 import nape.callbacks.InteractionCallback;
@@ -31,6 +28,7 @@ class ShardPhys extends Component {
 	public var hitFargerCallback: InteractionListener;
 	public var hitArmletCallback: InteractionListener;
 	public var hitArquenCallback: InteractionListener;
+	public var hitBorderCallback: InteractionListener;
 
 	override public function new() {
 		super({name: 'physic'});
@@ -65,34 +63,37 @@ class ShardPhys extends Component {
 			hitArquen
 		);
 		Luxe.physics.nape.space.listeners.add(hitArquenCallback);
+
+		hitBorderCallback = new InteractionListener(CbEvent.BEGIN, InteractionType.COLLISION,
+			PhysTypes.shard,
+			PhysTypes.border,
+			hitBorder
+		);
+		Luxe.physics.nape.space.listeners.add(hitBorderCallback);
 	}
 
 	function hitFarger(callback: InteractionCallback) {
-		// Essence splash based on this instance's position and rotation
-		if(callback.int1.castBody.id == body.id) {
-			// Luxe.events.fire('effect.essence.splash', {pos: new Vector(this.body.position.x, this.body.position.y), direction: -this.body.rotation});
-
-		}
 		hostDestroy();
 	}
 
 	// Current mechanic: bounce against shield, destroyed against undetached armlet
 	function hitArmlet(callback: InteractionCallback) {
-		// TODO spark
-		hostDestroy();
+
 	}
 
 	function hitArquen(callback: InteractionCallback) {
-		// TODO heavy bloodsplash based on this one's rotation
-		// TODO Luxe.events.fire('arque')
-		// TODO Timescale
 		hostDestroy();
+	}
+
+	function hitBorder(callback: InteractionCallback) {
+		// Luxe.audio.play('hitborder');
 	}
 
 	function hostDestroy() {
 		var host: entity.Shard = cast entity;
 		host.destroy();
 	}
+
 
 	override public function update(dt: Float) {
 		entity.pos = new Vector( body.position.x, body.position.y);

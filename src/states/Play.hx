@@ -6,8 +6,6 @@ import luxe.Color;
 import luxe.Vector;
 import luxe.Camera;
 
-// import luxe.Particles;
-
 import nape.geom.Vec2;
 import nape.phys.Body;
 import nape.phys.BodyType;
@@ -65,16 +63,14 @@ class Play extends State {
 		Luxe.physics.nape.space.worldLinearDrag = 2;
 		Luxe.physics.nape.space.worldAngularDrag = 2.4;
 
-		// nape.Config.linearSleepThreshold = 10;
-
 		// Create four boundary walls for gameplay arena
 		borders = new Body ( BodyType.STATIC );
 		borders.shapes.add(new Polygon(Polygon.rect(0, 0, Main.w, -1)));
 		borders.shapes.add(new Polygon(Polygon.rect(0, Main.h, Main.w, 1)));
 		borders.shapes.add(new Polygon(Polygon.rect(0, 0, -1, Main.h)));
 		borders.shapes.add(new Polygon(Polygon.rect(Main.w, 0, 1, Main.h)));
+		borders.cbTypes.add(PhysTypes.border);
 
-		// borders.setShapeMaterials(nape.phys.Material.rubber());
 		borders.setShapeMaterials(new nape.phys.Material(1.0, 1.0, 2.0, 1.0, 0.1));
 		borders.space = Luxe.physics.nape.space;
 		drawer.add(borders);
@@ -97,11 +93,8 @@ class Play extends State {
 
 	function setupCrew() {
 		spark = new particle.Spark();
-		// spark.stop();
-
 		demom = new particle.Explosion();
 		essence = new particle.Essence();
-		// demom.stop();
 	}
 
 	function setupEvents(){
@@ -174,54 +167,25 @@ class Play extends State {
 
 		// Ending
 		Luxe.events.listen('azur.died', function(e){
-			// TODO flash text
-			// TODO enable end state
-
-			// if (odeo.alive) {
-			// 	Main.state.enable('end', {azurwins: true, draw: false, arque: false});
-			// } else { // both players are dead
-			// 	Main.state.enable('end', {draw: true, azurwins: false, arque: false});
-			// }			
-
 			Main.state.enable('end', {azurwins: false, arque: arqueAchieved});
 			CheckForDraw(); // if the other is already dead within the timeframe, 'draw' text is drawn
 			lastDeath = Luxe.time;
 		});
 
 		Luxe.events.listen('odeo.died', function(e){
-			// TODO flash text
-			// TODO enable end state
-
-			// if (odeo.alive) {
-			// 	Main.state.enable('end', {azurwins: false, draw: false, arque: false});
-			// } else { // both players are dead
-			// 	Main.state.enable('end', {draw: true, azurwins: false, arque: false});
-			// }			
-
 			Main.state.enable('end', {azurwins: true, arque: arqueAchieved});
 			CheckForDraw();
 			lastDeath = Luxe.time;
 		});
 
-		// Luxe.events.listen('arque!', function(e){
-		// 	// TODO flash text separately ARQUE
-
-		// 	Main.state.enable('end', {arque: true, draw: false, azurwins: false});
-		// });
-
 		Luxe.events.listen('arque!', function (e){
-			// states.End.arque.visible = true;
 			arqueAchieved = true;
 		});
 
 	}
 
 	function CheckForDraw() {
-		// if (lastDeath != 0) return;
 		if (lastDeath != 0 && (Luxe.time - lastDeath) > 1.5) {
-			//TODO flash text Draw
-
-			// Main.states.result.text = 'draw';
 			Luxe.events.fire('end.draw');
 		}
 	}
@@ -235,41 +199,34 @@ class Play extends State {
 		drawer.destroy();
 	}
 
-
 	// #DebugArea
-	override public function onmousemove(e: MouseEvent) {
+	// override public function onmousemove(e: MouseEvent) {
 
-		// var desRot = Math.atan2(e.yrel * 100, e.xrel * 100);
-		// var desRot = Math.atan2(azur.physic.body.velocity.y, azur.physic.body.velocity.x);
-		// Luxe.draw.text({
-		// 	text: '${desRot}',
-		// 	pos: new Vector(200, 20),
-		// 	point_size: 48,
-		// 	align: right,
-		// 	immediate: true,
-		// });
+	// 	// var desRot = Math.atan2(e.yrel * 100, e.xrel * 100);
+	// 	// var desRot = Math.atan2(azur.physic.body.velocity.y, azur.physic.body.velocity.x);
+	// 	// Luxe.draw.text({
+	// 	// 	text: '${desRot}',
+	// 	// 	pos: new Vector(200, 20),
+	// 	// 	point_size: 48,
+	// 	// 	align: right,
+	// 	// 	immediate: true,
+	// 	// });
 
-		// debugText.text = Std.string(desRot);
-		// debugText.text = Std.string(azur.physic.body.angularVel);
-		// debugText.text = Std.string(azur.physic.body.rotation);
-	}
+	// 	// debugText.text = Std.string(desRot);
+	// 	// debugText.text = Std.string(azur.physic.body.angularVel);
+	// 	// debugText.text = Std.string(azur.physic.body.rotation);
+	// }
 
-	override public function onmousedown(e: MouseEvent) {
-		// spark.flash(e.pos);
-		// Luxe.events.fire('effect.spark', {pos: e.pos});
-		// Luxe.events.fire('effect.explosion', {pos: e.pos});
-		// Luxe.events.fire('effect.essence.drip', {pos: e.pos});
-	}
+	// override public function onmousedown(e: MouseEvent) {
+	// 	// spark.flash(e.pos);
+	// 	// Luxe.events.fire('effect.spark', {pos: e.pos});
+	// 	// Luxe.events.fire('effect.explosion', {pos: e.pos});
+	// 	// Luxe.events.fire('effect.essence.drip', {pos: e.pos});
+	// }
 
 	override function onkeyup( e:KeyEvent ) {
 		if(e.keycode == Key.space) {
-			// Luxe.shutdown();
-
-			// azur.joint_lt.active = false;
-			// trace ('space');
-
-			// Main.state.set('play');
-			Main.state.enable('end');
+			
 		}
 	}
 }

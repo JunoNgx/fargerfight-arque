@@ -25,13 +25,6 @@ class Arquen extends ArmBase {
 			Luxe.events.fire('arque!');
 
 			Luxe.camera.shake(80);
-
-			// Done in PlayerBase - TODO extremely heavy impulse
-			// Done in PlayerBase - TODO host.alive = false;
-			// Done in PlayerBase - TODO Break constraint of everything
-			// Done - TODO Heavy bloodsplash
-			// Done - TODO Luxe.events.fire('Arque!');
-
 		}
 	}
 

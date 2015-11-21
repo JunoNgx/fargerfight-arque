@@ -55,10 +55,6 @@ class Splash extends State {
 		switchState();
 	}
 
-	//override function update(dt: Float) {
-		//
-	//}
-	//
 	override function onleave<T> (_:T) {
 		Luxe.timer.reset();
 		logo.destroy();

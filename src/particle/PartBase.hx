@@ -5,6 +5,7 @@ import luxe.Vector;
 import luxe.Particles;
 
 // Base class for particle systems in this game
+// this would make extension to all particle systems easier if needed
 class PartBase extends ParticleSystem {
 	
 	public function flash(_pos: Vector, ?_direction: Float) {

@@ -29,7 +29,6 @@ typedef ArmOptions = {
 	var y: Float;
 	var rot: Float;
 	var shape: Array<nape.geom.Vec2>;
-	// var shape: Shape;
 	var cbType: CbType;
 }
 

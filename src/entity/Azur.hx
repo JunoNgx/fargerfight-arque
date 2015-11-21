@@ -5,11 +5,6 @@ import luxe.Color;
 
 import nape.shape.Polygon;
 
-// import component.FargerPhys;
-// import component.Armlet;
-// import component.Shield;
-// import component.Arquen;
-
 import nape.geom.Vec2;
 import nape.constraint.WeldJoint;
 

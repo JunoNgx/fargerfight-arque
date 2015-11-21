@@ -4,11 +4,6 @@ import luxe.Sprite;
 import luxe.Vector;
 import luxe.Color;
 
-// import component.FargerPhys;
-// import component.Armlet;
-// import component.Shield;
-// import component.Arquen;
-
 import nape.phys.Body;
 import nape.geom.Vec2;
 import nape.constraint.WeldJoint;
@@ -18,7 +13,7 @@ import C;
 
 class PlayerBase extends Sprite {
 
-	public var hp: Int = 1;
+	public var hp: Int = 3;
 	public var alive: Bool = true;
 
 	public var phys: component.FargerPhys;
@@ -66,7 +61,6 @@ class PlayerBase extends Sprite {
 
 			Luxe.timer.schedule(0.8, function(){ // Restore timescale in 0.8 seconds
 				Luxe.timescale = 1;
-				// Luxe.camera.shake(50);
 				
 				// Remove all joints (and disable all cbTypes as well)
 				this.events.fire('detach.joint_lt');
@@ -159,25 +153,6 @@ class PlayerBase extends Sprite {
 		joint.space = Luxe.physics.nape.space;
 		return joint;
 	}
-
-	// function equipArmlet(_armlet: component.Armlet) {
-	// 	// var anchor = Vec2.weak (this.phys.body.position.x, Main.h * 0.5);
-	// 	var anchor = this.phys.body.position;
-	// 	var joint = new nape.constraint.WeldJoint(
-	// 		this.phys.body,
-	// 		_armlet.body,
-	// 		nape.geom.Vec2.weak(),
-	// 		_armlet.body.worldPointToLocal(anchor),
-	// 		0
-	// 	);
-	// 	joint.space = Luxe.physics.nape.space;
-
-	// 	// if (states.Play.drawer != null) joint.debugDraw = true;
-	// 	// no idea why the hell it doesn't work
-
-	// 	return joint;
-		
-	// }
 
 	override public function update(dt: Float) {
 		

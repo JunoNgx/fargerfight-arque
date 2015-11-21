@@ -20,7 +20,7 @@ class C {
 
 	public static var shard_radius: Float = 10;
 	public static var shard_lifetime: Float = 10;
-	public static var shard_speed: Float = 100; // impulse/force being applied on shard upon being fired
+	public static var shard_speed: Float = 70; // impulse/force being applied on shard upon being fired
 
 	// Prop
 	public static var essence_pos_variance: Float = 64;

@@ -22,8 +22,8 @@ class Shard extends Sprite {
 		super({
 			name: 'shard',
 			name_unique: true,
-			// visible: false,
 			depth: -3,
+			size: new Vector(24,24),
 		});
 
 		phys = new ShardPhys();
@@ -50,6 +50,7 @@ class Shard extends Sprite {
 			lifetime += dt;
 		} else {
 			destroy();
+			// Luxe.audio.play('sharddestroy');
 			Luxe.events.fire('effect.explosion', {pos: this.pos});
 		} 
 	}
