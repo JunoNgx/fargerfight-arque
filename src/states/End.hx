@@ -62,9 +62,9 @@ class End extends State {
 	}
 
 	override public function ondisabled <T> (_:T) {
-		result.destroy();
-		arque.destroy();
-		replay.destroy();
+		if (result != null) result.destroy();
+		if (arque != null) arque.destroy();
+		if (replay != null) replay.destroy();
 
 		Luxe.events.unlisten('end.draw');
 		Luxe.events.unlisten('end.arque');

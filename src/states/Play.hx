@@ -37,6 +37,7 @@ class Play extends State {
 
 	public static var lastDeath: Float; // last death of an farger, to check for draw
 	public static var arqueAchieved: Bool;
+	public static var matchResolved: Bool; // final result is out, will no longer change or enable new result state
 
 	var azur: entity.Azur; // Left fighter
 	var odeo: entity.Odeo; // Right fighter
@@ -48,6 +49,7 @@ class Play extends State {
 
         lastDeath = 0;
         arqueAchieved = false;
+        matchResolved = false;
 
 		setupWorld();
 		spawnPlayers();
@@ -167,15 +169,19 @@ class Play extends State {
 
 		// Ending
 		Luxe.events.listen('azur.died', function(e){
-			Main.state.enable('end', {azurwins: false, arque: arqueAchieved});
-			CheckForDraw(); // if the other is already dead within the timeframe, 'draw' text is drawn
-			lastDeath = Luxe.time;
+			if (!matchResolved) {
+				Main.state.disable('end'); // dirty hack/ workaround
+				Main.state.enable('end', {azurwins: false, arque: arqueAchieved});
+				MatchEnding();
+			}
 		});
 
 		Luxe.events.listen('odeo.died', function(e){
-			Main.state.enable('end', {azurwins: true, arque: arqueAchieved});
-			CheckForDraw();
-			lastDeath = Luxe.time;
+			if (!matchResolved) {
+				Main.state.disable('end');
+				Main.state.enable('end', {azurwins: true, arque: arqueAchieved});
+				MatchEnding();
+			}
 		});
 
 		Luxe.events.listen('arque!', function (e){
@@ -184,15 +190,23 @@ class Play extends State {
 
 	}
 
+	function MatchEnding() {
+		CheckForDraw(); // if the other is already dead within the timeframe, 'draw' text is drawn
+		lastDeath = Luxe.time;
+		Luxe.timer.schedule(C.draw_allowance, function(){
+			matchResolved = true;
+		});
+	}
+
 	function CheckForDraw() {
-		if (lastDeath != 0 && (Luxe.time - lastDeath) > 1.5) {
+		if (lastDeath != 0 && (Luxe.time - lastDeath) < C.draw_allowance) {
 			Luxe.events.fire('end.draw');
 		}
 	}
 
-	override public function update(dt: Float) {
+	// override public function update(dt: Float) {
 
-	}
+	// }
 
 	override public function onleave<T> (_:T) {
 		Luxe.scene.empty();
@@ -227,7 +241,10 @@ class Play extends State {
 
 	override function onkeyup( e:KeyEvent ) {
 		if(e.keycode == Key.space) {
-			
+			Main.state.enable('end', {azurwins: true, arque: arqueAchieved});
+		} else if (e.keycode == Key.key_t) {
+			Luxe.events.fire('end.draw');
+			trace ('end.draw');
 		}
 	}
 }
