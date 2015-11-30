@@ -46,6 +46,8 @@ class Base extends Component {
 	}
 
 	override public function ontouchup(e: TouchEvent) {
+		if (touchid != e.touch_id) return;
+		
 		isActive = false;
 		touchid = 9999;
 

@@ -23,6 +23,7 @@ class Arquen extends ArmBase {
 			Luxe.events.fire('effect.essence.splash.heavy', {pos: new Vector(this.body.position.x, this.body.position.y)});
 
 			Luxe.events.fire('arque!');
+			trace('arque!');
 
 			Luxe.camera.shake(80);
 		}

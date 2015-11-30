@@ -197,6 +197,7 @@ class Play extends State {
 	override public function onleave<T> (_:T) {
 		Luxe.scene.empty();
 		drawer.destroy();
+		Luxe.events.clear();
 	}
 
 	// #DebugArea

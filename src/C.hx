@@ -6,8 +6,8 @@ class C {
 
 	// Touch control
 	public static var double_tap: Float = 0.3;
-	public static var force_multiplier: Float = 12;
-	public static var angularVel_multiplier: Float = 3;
+	public static var force_multiplier: Float = 17;
+	public static var angularVel_multiplier: Float = 5;
 
 	// Impact forces upon breakage of joints
 	public static var if_armlet: Float = 700;
@@ -19,7 +19,7 @@ class C {
 	public static var barrel_angle: Float = 0.21; // angle multiplier
 
 	public static var shard_radius: Float = 10;
-	public static var shard_lifetime: Float = 10;
+	public static var shard_lifetime: Float = 2;
 	public static var shard_speed: Float = 70; // impulse/force being applied on shard upon being fired
 
 	// Prop
