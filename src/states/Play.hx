@@ -170,7 +170,7 @@ class Play extends State {
 		// Ending
 		Luxe.events.listen('azur.died', function(e){
 			if (!matchResolved) {
-				Main.state.disable('end'); // dirty hack/ workaround
+				if (Main.state.enabled('end')) Main.state.disable('end'); // dirty hack/ workaround
 				Main.state.enable('end', {azurwins: false, arque: arqueAchieved});
 				MatchEnding();
 			}
@@ -178,7 +178,7 @@ class Play extends State {
 
 		Luxe.events.listen('odeo.died', function(e){
 			if (!matchResolved) {
-				Main.state.disable('end');
+				if (Main.state.enabled('end')) Main.state.disable('end');
 				Main.state.enable('end', {azurwins: true, arque: arqueAchieved});
 				MatchEnding();
 			}
@@ -204,9 +204,16 @@ class Play extends State {
 		}
 	}
 
-	// override public function update(dt: Float) {
-
-	// }
+	override public function update(dt: Float) {
+		Luxe.draw.text({
+			text: '${matchResolved}',
+			pos: new Vector(20, 20),
+			point_size: 48,
+			immediate: true,
+			depth: 20,
+			color: new Color().rgb(0xdddddd),
+		});
+	}
 
 	override public function onleave<T> (_:T) {
 		Luxe.scene.empty();

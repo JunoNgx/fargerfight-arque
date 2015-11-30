@@ -36,7 +36,7 @@ class C {
 	public static var essence_splash_heavy_amt_max: Int = 100;
 
 	// Rules
-	public static var draw_allowance: Float = 3; // The number of seconds to resolve a match as a draw when both players die 
+	public static var draw_allowance: Float = 15; // The number of seconds to resolve a match as a draw when both players die 
 
 	public static var body_armlet: Array<nape.geom.Vec2> = Polygon.box( 64, 5);
 	public static var body_farger: Array<nape.geom.Vec2> = Polygon.regular(48, 48, 3, Math.PI);
