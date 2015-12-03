@@ -3,6 +3,8 @@ package component;
 import luxe.Component;
 import luxe.options.ComponentOptions;
 
+import luxe.Sprite;
+
 import nape.phys.Body;
 // import nape.phys.Shape;
 import nape.phys.Material;
@@ -30,6 +32,7 @@ typedef ArmOptions = {
 	var rot: Float;
 	var shape: Array<nape.geom.Vec2>;
 	var cbType: CbType;
+	@:optional var texture: phoenix.Texture;
 }
 
 // Base class for armor/firearm components,
@@ -38,6 +41,8 @@ class ArmBase extends Component {
 
 	public var body: Body;
 	public var hitShardListener: InteractionListener;
+
+	public var gfx: Sprite;
 
 	public var detached: Bool = false;
 
@@ -56,6 +61,16 @@ class ArmBase extends Component {
 		body.position.setxy(Main.w * _options.x, Main.h * _options.y);
 		body.rotation = _options.rot;
 		if (_options.cbType != null) body.cbTypes.add( _options.cbType );
+		
+		// Graphics
+		gfx = new Sprite({
+			name:'gfx',
+			name_unique: true,
+			pos: new luxe.Vector(this.body.position.x, this.body.position.y),
+			rotation_z: this.body.rotation,
+			size: new luxe.Vector(10, 10),
+			depth: -4,
+		});
 
 		// Debug drawer
 		if(states.Play.drawer != null) states.Play.drawer.add(body);
@@ -66,6 +81,11 @@ class ArmBase extends Component {
 			hitShard
 		);
 		Luxe.physics.nape.space.listeners.add(hitShardListener);
+	}
+
+	override function update(dt: Float) {
+		gfx.pos = new luxe.Vector(this.body.position.x, this.body.position.y);
+		gfx.radians = this.body.rotation;
 	}
 
 	@:noCompletion public function hitShard( callback: InteractionCallback ) {}

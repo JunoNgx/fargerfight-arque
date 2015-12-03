@@ -49,6 +49,8 @@ class FargerPhys extends ArmBase {
 
 		host.pos = new Vector( body.position.x, body.position.y);
 		host.radians = body.rotation;
+
+		super.update(dt); // to update its gfx inherited from ArmBase
 	}
 
 	public function shaken() {
