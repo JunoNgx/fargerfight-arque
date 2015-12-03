@@ -16,6 +16,7 @@ class Main extends luxe.Game {
 	public static var h: Int = 720;
 
 	public static var state: States;
+	public static var farglib: Array<Color>;
 
 	override function config(config:luxe.AppConfig):luxe.AppConfig {
 
@@ -44,7 +45,7 @@ class Main extends luxe.Game {
 		Luxe.camera.size = new Vector(Main.w, Main.h);
 		Luxe.camera.size_mode = SizeMode.fit;
 
-		// Luxe.renderer.clear_color = new Color().rgb(0xD7D7D7);
+		Luxe.renderer.clear_color = new Color().rgb(0xeeeeee);
 
 		state = new States( { name: "states" } );
 
@@ -56,16 +57,29 @@ class Main extends luxe.Game {
 		state.set(initialState);
 		state.enable('menu');
 
-		setupEvents();
+		farglib = [
+			new Color().rgb(0xff007b), //stylish red
+			new Color().rgb(0x007bff), //stylish blue
+			new Color().rgb(0xACE1AF), // celadon
+			new Color().rgb(0xff7b00), //stylish orange
+			new Color().rgb(0xB57EDC), // lavender
+			new Color().rgb(0x4D5D53), // feldgrau
+			new Color().rgb(0xB6564D), // rich lilac
+			new Color().rgb(0x81D8D0), // tiffany blue
+			new Color().rgb(0xF8DE7E), // jasmine
+			new Color().rgb(0xE52B50), // amaranth
+		];
+
+		// setupEvents();
 	}
 
-	public function setupEvents() {
+	// public function setupEvents() {
 
-		Luxe.events.listen('game.ends', function(_e: EndEvent){
-			state.enable('end');
-		}); 
+	// 	Luxe.events.listen('game.ends', function(_e: EndEvent){
+	// 		state.enable('end');
+	// 	}); 
 
-	}
+	// }
 
 }
 
