@@ -5,6 +5,7 @@ import luxe.States;
 import luxe.Color;
 import luxe.Vector;
 import luxe.Camera;
+import luxe.Text;
 
 import nape.geom.Vec2;
 import nape.phys.Body;
@@ -39,6 +40,11 @@ class Play extends State {
 	public static var arqueAchieved: Bool;
 	public static var matchResolved: Bool; // final result is out, will no longer change or enable new result state
 
+	public static var end_scene: luxe.Scene;
+	public static var end_winner: luxe.Text;
+	public static var end_arque: luxe.Text;
+	public static var end_replay: luxe.Sprite;
+
 	var azur: entity.Azur; // Left fighter
 	var odeo: entity.Odeo; // Right fighter
 
@@ -56,7 +62,7 @@ class Play extends State {
 		setupCrew();
 
 		setupEvents();
-
+		setupResultScreen();
 	}
 
 	function setupWorld() {
@@ -170,16 +176,18 @@ class Play extends State {
 		// Ending
 		Luxe.events.listen('azur.died', function(e){
 			if (!matchResolved) {
-				if (Main.state.enabled('end')) Main.state.disable('end'); // dirty hack/ workaround
-				Main.state.enable('end', {azurwins: false, arque: arqueAchieved});
+				// if (Main.state.enabled('end')) Main.state.disable('end'); // dirty hack/ workaround
+				// Main.state.enable('end', {azurwins: false, arque: arqueAchieved});
+				end_winner.text = 'odeo wins!';
 				MatchEnding();
 			}
 		});
 
 		Luxe.events.listen('odeo.died', function(e){
 			if (!matchResolved) {
-				if (Main.state.enabled('end')) Main.state.disable('end');
-				Main.state.enable('end', {azurwins: true, arque: arqueAchieved});
+				// if (Main.state.enabled('end')) Main.state.disable('end');
+				// Main.state.enable('end', {azurwins: true, arque: arqueAchieved});
+				end_winner.text = 'azur wins!';
 				MatchEnding();
 			}
 		});
@@ -192,15 +200,20 @@ class Play extends State {
 
 	function MatchEnding() {
 		CheckForDraw(); // if the other is already dead within the timeframe, 'draw' text is drawn
-		lastDeath = Luxe.time;
-		Luxe.timer.schedule(C.draw_allowance, function(){
+		end_winner.visible = true; // reveal the result text
+		if (arqueAchieved) end_arque.visible = true;
+
+		lastDeath = Luxe.time; // assign the time of death for detection of draw (two deaths within C.draw_allowance)
+		Luxe.timer.schedule(C.draw_allowance, function(){ // conclude the match and allow restart
 			matchResolved = true;
+			end_replay.visible = true; // reveal the restart button
 		});
 	}
 
 	function CheckForDraw() {
 		if (lastDeath != 0 && (Luxe.time - lastDeath) < C.draw_allowance) {
-			Luxe.events.fire('end.draw');
+			// Luxe.events.fire('end.draw');
+			end_winner.text = 'draw';
 		}
 	}
 
@@ -217,7 +230,10 @@ class Play extends State {
 
 	override public function onleave<T> (_:T) {
 		Luxe.scene.empty();
+		end_scene.empty();
+		end_scene.destroy();
 		drawer.destroy();
+
 		Luxe.events.clear();
 	}
 
@@ -252,6 +268,55 @@ class Play extends State {
 		} else if (e.keycode == Key.key_t) {
 			Luxe.events.fire('end.draw');
 			trace ('end.draw');
+		}
+	}
+
+	// END SCREEN STUFF
+
+	function setupResultScreen() {
+		end_scene = new luxe.Scene('endScene');
+
+		end_winner = new Text ({
+			name: 'r.winner',
+			// name_unique: true, // [workaround/dirty hack] to prevent this from being trapped in limbo with another of the same name, since many will be created in one session
+			pos: new Vector(Main.w * 0.5, Main.h * 0.2),
+			text: 'result',
+			align: center,
+			align_vertical: center,
+			point_size: 96,
+			visible: false,
+			// visible: true,
+			scene: end_scene,
+		});
+
+		end_arque = new Text ({
+			name: 'r.arque',
+			// name_unique: true,
+			pos: new Vector(Main.w * 0.5, Main.h * 0.4),
+			text: 'arque!',
+			align: center,
+			align_vertical: center,
+			point_size: 96,
+			visible: false,
+			// visible: true,
+			scene: end_scene,
+		});
+
+		end_replay = new Sprite ({
+			name: 'b.replay',
+			// name_unique: true,
+			pos: new Vector (Main.w * 0.5, Main.h * 0.7),
+			size: new Vector (128, 128),
+			visible: false,
+			// visible: true,
+			scene: end_scene,
+		});
+	}
+
+	override public function onmousedown(e: MouseEvent) {
+		if (!matchResolved) return;
+		if (end_replay.point_inside(Luxe.camera.screen_point_to_world(e.pos))) {
+			Main.state.set('play');
 		}
 	}
 }
