@@ -352,7 +352,7 @@ class Play extends State {
 		end_reset = new Sprite ({
 			name: 'b.reset',
 			// name_unique: true,
-			pos: new Vector (Main.w * 0.5, Main.h * 0.7),
+			pos: new Vector (Main.w * 0.5, Main.h * 0.8),
 			size: new Vector (128, 128),
 			// visible: false,
 			// visible: true,
