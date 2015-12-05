@@ -244,6 +244,7 @@ class Play extends State {
 			// end_winner.text = 'draw';
 			end_winner.texture = Luxe.resources.texture('assets/banner_draw.png');
 			end_winner.color = new Color();
+			end_winner.size = new Vector(256, 128);
 		}
 	}
 
