@@ -50,7 +50,7 @@ class Menu extends State {
 		instruction = new Text({
 			name: 't.instruction',
 			// name_unique: true,
-			text: 'on each half of the screen \n swipe to move // double tap to fire',
+			text: 'on each half of the screen \n touch and move to maneuvre // double tap to attack',
 			pos: new Vector(Main.w * 0.5, Main.h * 0.7),
 			point_size: 32,
 			align: center,
