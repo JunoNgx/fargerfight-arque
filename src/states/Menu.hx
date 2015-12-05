@@ -19,6 +19,9 @@ class Menu extends State {
 	var instruction: Text;
 	var copyright: Text;
 
+	var luxe: Sprite;
+	var aureotetra: Sprite;
+
 	override public function onenabled <T> (_:T) {
 		// title = new Text({
 		// 	name: 't.title',
@@ -65,6 +68,22 @@ class Menu extends State {
 			font: Main.raleway32,
 			color: C.cText,
 		});
+
+		luxe = new Sprite({
+			name: 'luxelogo',
+			name_unique: true,
+			size: new Vector(96, 96),
+			pos: new Vector(Main.w * 0.94, Main.h * 0.9),
+			texture: Luxe.resources.texture('assets/logo_luxe.png'),
+		});
+
+		aureotetra = new Sprite({
+			name: 'aureotetralogo',
+			name_unique: true,
+			size: new Vector(64, 64),
+			pos: new Vector(Main.w * 0.69, Main.h * 0.91),
+			texture: Luxe.resources.texture('assets/logo_aureotetra.png'),
+		});
 	}
 
 	override public function ondisabled <T> (_:T) {
@@ -72,6 +91,9 @@ class Menu extends State {
 		playButton.destroy();
 		instruction.destroy();
 		copyright.destroy();
+
+		luxe.destroy();
+		aureotetra.destroy();
 	}
 
 	override function onmousedown(e: MouseEvent) {
