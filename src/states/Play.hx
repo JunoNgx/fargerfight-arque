@@ -49,7 +49,7 @@ class Play extends State {
 	var odeo: entity.Odeo; // Right fighter
 
 	override public function onenter<T> (_:T) {
-		drawer = new DebugDraw();
+		// drawer = new DebugDraw();
 		debugText = new luxe.Text({name: 'debug', pos: new Vector(200, 20)});
         Luxe.physics.nape.debugdraw = drawer;
 
@@ -81,7 +81,7 @@ class Play extends State {
 
 		borders.setShapeMaterials(new nape.phys.Material(1.0, 1.0, 2.0, 1.0, 0.1));
 		borders.space = Luxe.physics.nape.space;
-		drawer.add(borders);
+		if(states.Play.drawer != null) drawer.add(borders);
 
 		spawnCovers();
 
@@ -96,7 +96,7 @@ class Play extends State {
 		// Objects that act as cover and obstacles that shards will also bounce off from
 		covers = new Body (BodyType.STATIC);
 		covers.space = Luxe.physics.nape.space;
-		drawer.add(covers);
+		if(states.Play.drawer != null) drawer.add(covers);
 	}
 
 	function setupCrew() {
@@ -232,7 +232,7 @@ class Play extends State {
 		Luxe.scene.empty();
 		end_scene.empty();
 		end_scene.destroy();
-		drawer.destroy();
+		if(states.Play.drawer != null)  drawer.destroy();
 
 		Luxe.events.clear();
 	}

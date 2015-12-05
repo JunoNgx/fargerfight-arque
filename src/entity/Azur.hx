@@ -65,6 +65,8 @@ class Azur extends PlayerBase {
 			x: 0.28,
 			y: 0.48,
 			rot: 0,
+			texture: Luxe.resources.texture('assets/shield.png'),
+			color: new Color().rgb(0x333333),
 		}));
 
 		this.add(new component.Arquen({
@@ -74,6 +76,8 @@ class Azur extends PlayerBase {
 			x: 0.28,
 			y: 0.55,
 			rot: 0,
+			texture: Luxe.resources.texture('assets/arquen.png'),
+			color: new Color().rgb(0x333333),
 		}));
 
 		// entity-specific controller

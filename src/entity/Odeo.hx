@@ -14,13 +14,17 @@ class Odeo extends PlayerBase {
 		super({
 			name: 'odeo',
 			depth: -2,
+			texture: Luxe.resources.texture('assets/farger_entity.png'),
+			color: new Color().rgb(0xff007b)
 		});
 
 		phys = new component.FargerPhys({
 			name: 'physic',
 			shape: C.body_farger,
 			cbType: PhysTypes.farger,
-			x: 0.75, y: 0.5, rot: -Math.PI
+			x: 0.75, y: 0.5, rot: -Math.PI,
+			texture: Luxe.resources.texture('assets/farger_phys.png'),
+			color: new Color().rgb(0x333333),
 		});
 		this.add(phys);
 	}
@@ -35,6 +39,8 @@ class Odeo extends PlayerBase {
 			x: 0.75,
 			y: 0.56,
 			rot: -Math.PI - Math.PI/6,
+			texture: Luxe.resources.texture('assets/armlet_lt.png'),
+			color: new Color().rgb(0x333333),
 		}));
 
 		this.add(new component.Armlet({
@@ -44,6 +50,8 @@ class Odeo extends PlayerBase {
 			x: 0.75,
 			y: 0.44,
 			rot: -Math.PI + Math.PI/6,
+			texture: Luxe.resources.texture('assets/armlet_rt.png'),
+			color: new Color().rgb(0x333333),
 		}));
 
 		// Shield
@@ -53,7 +61,9 @@ class Odeo extends PlayerBase {
 			cbType: PhysTypes.shield,
 			x: 0.72,
 			y: 0.52,
-			rot: -Math.PI
+			rot: -Math.PI,
+			texture: Luxe.resources.texture('assets/shield.png'),
+			color: new Color().rgb(0x333333),
 		}));
 
 		this.add(new component.Arquen({
@@ -63,6 +73,8 @@ class Odeo extends PlayerBase {
 			x: 0.72,
 			y: 0.45,
 			rot: -Math.PI,
+			texture: Luxe.resources.texture('assets/arquen.png'),
+			color: new Color().rgb(0x333333),
 		}));
 
 		// entity-specific controller

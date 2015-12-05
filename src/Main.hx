@@ -35,6 +35,9 @@ class Main extends luxe.Game {
 			{id: 'assets/farger_phys.png'},
 			{id: 'assets/armlet_rt.png'},
 			{id: 'assets/armlet_lt.png'},
+			{id: 'assets/shield.png'},
+			{id: 'assets/arquen.png'},
+			{id: 'assets/shard.png'},
 		];
 
 		return config;

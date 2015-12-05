@@ -23,7 +23,8 @@ class Shard extends Sprite {
 			name: 'shard',
 			name_unique: true,
 			depth: -3,
-			size: new Vector(24,24),
+			size: new Vector(34,34),
+			texture: Luxe.resources.texture('assets/shard.png')
 		});
 
 		phys = new ShardPhys();
