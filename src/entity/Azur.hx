@@ -17,14 +17,18 @@ class Azur extends PlayerBase {
 		super({
 			name: 'azur',
 			// debug only
-			depth: -2
+			depth: -2,
+			texture: Luxe.resources.texture('assets/farger_entity.png'),
+			color: new Color().rgb(0x007bff)
 		});
 
 		phys = new component.FargerPhys({
 			name: 'physic',
 			shape: C.body_farger,
 			cbType: PhysTypes.farger,
-			x: 0.25, y: 0.5, rot: 0  // x and y relative coordinates, rotation
+			x: 0.25, y: 0.5, rot: 0,  // x and y relative coordinates, rotation
+			texture: Luxe.resources.texture('assets/farger_phys.png'),
+			color: new Color().rgb(0x333333),
 		});
 		this.add(phys);
 	}
@@ -38,6 +42,8 @@ class Azur extends PlayerBase {
 			x: 0.25,
 			y: 0.44,
 			rot: -Math.PI/6,
+			texture: Luxe.resources.texture('assets/armlet_lt.png'),
+			color: new Color().rgb(0x333333),
 		}));
 
 		this.add(new component.Armlet({
@@ -47,6 +53,8 @@ class Azur extends PlayerBase {
 			x: 0.25,
 			y: 0.56,
 			rot: Math.PI/6,
+			texture: Luxe.resources.texture('assets/armlet_rt.png'),
+			color: new Color().rgb(0x333333),
 		}));
 
 		// Shield

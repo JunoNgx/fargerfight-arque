@@ -30,7 +30,11 @@ class Main extends luxe.Game {
         }
 
 		config.preload.textures = [
-			{id: 'assets/logo_box.png'}
+			{id: 'assets/logo_box.png'},
+			{id: 'assets/farger_entity.png'},
+			{id: 'assets/farger_phys.png'},
+			{id: 'assets/armlet_rt.png'},
+			{id: 'assets/armlet_lt.png'},
 		];
 
 		return config;

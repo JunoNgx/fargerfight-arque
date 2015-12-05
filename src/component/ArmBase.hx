@@ -33,6 +33,7 @@ typedef ArmOptions = {
 	var shape: Array<nape.geom.Vec2>;
 	var cbType: CbType;
 	@:optional var texture: phoenix.Texture;
+	@:optional var color: luxe.Color;
 }
 
 // Base class for armor/firearm components,
@@ -68,8 +69,10 @@ class ArmBase extends Component {
 			name_unique: true,
 			pos: new luxe.Vector(this.body.position.x, this.body.position.y),
 			rotation_z: this.body.rotation,
-			size: new luxe.Vector(10, 10),
+			// size: new luxe.Vector(90, 90),
 			depth: -4,
+			texture: _options.texture,
+			color: _options.color,
 		});
 
 		// Debug drawer
