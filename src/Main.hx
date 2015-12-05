@@ -68,16 +68,6 @@ class Main extends luxe.Game {
 		
 		raleway32 = Luxe.resources.font('assets/raleway32.fnt');
 
-		state = new States( { name: "states" } );
-
-		state.add (new states.Play({name: 'play'}));
-		state.add (new states.Menu({name: 'menu'}));
-		state.add (new states.End({name: 'end'}));
-		state.add (new states.Splash({name: 'splash'}));
-
-		state.set(initialState);
-		state.enable('menu');
-
 		farglib = [
 			new Color().rgb(0xff007b), //stylish red
 			new Color().rgb(0x007bff), //stylish blue
@@ -91,17 +81,17 @@ class Main extends luxe.Game {
 			new Color().rgb(0xE52B50), // amaranth
 		];
 
+		state = new States( { name: "states" } );
 
-		// setupEvents();
+		state.add (new states.Play({name: 'play'}));
+		state.add (new states.Menu({name: 'menu'}));
+		state.add (new states.End({name: 'end'}));
+		state.add (new states.Splash({name: 'splash'}));
+
+		state.set(initialState);
+		state.enable('menu');
+		
 	}
-
-	// public function setupEvents() {
-
-	// 	Luxe.events.listen('game.ends', function(_e: EndEvent){
-	// 		state.enable('end');
-	// 	}); 
-
-	// }
 
 }
 

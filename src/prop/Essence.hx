@@ -15,7 +15,7 @@ class Essence extends Sprite { // Read: blood. I'm just trying to be absurdly pr
 			depth: -5, // above the background, but below fargers and other objects
 			size: new Vector(32, 32),
 
-			color: new Color(1, 0.5, 0),
+			color: states.Play.esc,
 			rotation_z: 45,
 
 			pos: _pos,

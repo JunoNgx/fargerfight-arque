@@ -29,8 +29,11 @@ class Essence extends PartBase { // read "blood", I'm just trying to be hipster
 			end_speed: 20,
 			speed_random: 0,
 
-			start_color: new Color(1, 0.5, 0),
-			end_color: new Color(1, 0.5, 0),
+			start_color: states.Play.esc,
+			end_color: states.Play.esc,
+			
+			// start_color: new Color(1, 0.5, 0),
+			// end_color: new Color(1, 0.5, 0),
 
 			start_size: new Vector(15, 15),
 			start_size_random: new Vector(0,0),

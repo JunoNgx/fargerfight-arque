@@ -178,12 +178,12 @@ class PlayerBase extends Sprite {
 			color: new Color().rgb(0xdddddd),
 		});
 
-		Luxe.draw.ngon({
-			pos: this.barrel,
-			r: 3,
-			sides: 4,
-			immediate: true,
-		});
+		// Luxe.draw.ngon({
+		// 	pos: this.barrel,
+		// 	r: 3,
+		// 	sides: 4,
+		// 	immediate: true,
+		// });
 		
 	}
 

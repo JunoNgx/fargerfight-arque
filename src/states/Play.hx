@@ -48,6 +48,10 @@ class Play extends State {
 	var azur: entity.Azur; // Left fighter
 	var odeo: entity.Odeo; // Right fighter
 
+	public static var p1c: luxe.Color;
+	public static var p2c: luxe.Color;
+	public static var esc: luxe.Color;
+
 	override public function onenter<T> (_:T) {
 		// drawer = new DebugDraw();
 		debugText = new luxe.Text({name: 'debug', pos: new Vector(200, 20)});
@@ -58,6 +62,7 @@ class Play extends State {
         matchResolved = false;
 
 		setupWorld();
+		chooseColors();
 		spawnPlayers();
 		setupCrew();
 
@@ -87,9 +92,21 @@ class Play extends State {
 
 	}
 
+	function chooseColors() {
+		p1c = Main.farglib[Luxe.utils.random.int(0,10)];
+		p2c = Main.farglib[Luxe.utils.random.int(0,10)];
+		esc = Main.farglib[Luxe.utils.random.int(0,10)];
+
+		do { p2c = Main.farglib[Luxe.utils.random.int(0,10)]; } while (p1c == p2c);
+		do { esc = Main.farglib[Luxe.utils.random.int(0,10)]; } while (esc == p1c || esc == p2c);
+	}
+
 	function spawnPlayers() {
-		azur = new entity.Azur();
-		odeo = new entity.Odeo();
+		azur = new entity.Azur(p1c);
+		odeo = new entity.Odeo(p2c);
+
+		// azur = new entity.Azur(new Color().rgb(0x007bff));
+		// odeo = new entity.Odeo(new Color().rgb(0xff007b));
 	}
 
 	function spawnCovers() {
@@ -217,7 +234,7 @@ class Play extends State {
 		}
 	}
 
-	// // #debug
+	// // debugArea
 	// override public function update(dt: Float) {
 	// 	Luxe.draw.text({
 	// 		text: '${matchResolved}',
