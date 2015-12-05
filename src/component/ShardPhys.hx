@@ -73,7 +73,9 @@ class ShardPhys extends Component {
 	}
 
 	function hitFarger(callback: InteractionCallback) {
-		hostDestroy();
+		if(callback.int1.castBody.id == body.id) {
+			hostDestroy();
+		}
 	}
 
 	// Current mechanic: bounce against shield, destroyed against undetached armlet
@@ -82,7 +84,9 @@ class ShardPhys extends Component {
 	}
 
 	function hitArquen(callback: InteractionCallback) {
-		hostDestroy();
+		if(callback.int1.castBody.id == body.id) {
+			hostDestroy();
+		}
 	}
 
 	function hitBorder(callback: InteractionCallback) {

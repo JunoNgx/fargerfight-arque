@@ -39,6 +39,7 @@ class FargerPhys extends ArmBase {
 
 				// Splash essence base the other body ```callback.int2``` and ```angle``` being calculated above
 				Luxe.events.fire('effect.essence.splash', {pos: new Vector(this.body.position.x, this.body.position.y), direction: -angle});
+				Luxe.events.fire('effect.essence', {pos: new Vector(this.body.position.x, this.body.position.y)});
 				host.bleed(1.2);
 			});
 		}
