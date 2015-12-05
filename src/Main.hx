@@ -39,7 +39,7 @@ class Main extends luxe.Game {
 			{id: 'assets/button_reset.png'},
 			{id: 'assets/banner_wins.png'},
 			{id: 'assets/banner_draw.png'},
-			{id: 'assets/arque_achieved.png'},
+			{id: 'assets/banner_arque.png'},
 
 			{id: 'assets/farger_entity.png'},
 			{id: 'assets/farger_phys.png'},

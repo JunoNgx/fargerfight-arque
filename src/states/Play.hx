@@ -39,10 +39,11 @@ class Play extends State {
 	public static var lastDeath: Float; // last death of an farger, to check for draw
 	public static var arqueAchieved: Bool;
 	public static var matchResolved: Bool; // final result is out, will no longer change or enable new result state
+	public static var readyToReset: Bool; // final permission to reset the match
 
 	public static var end_scene: luxe.Scene;
-	public static var end_winner: luxe.Text;
-	public static var end_arque: luxe.Text;
+	public static var end_winner: luxe.Sprite;
+	public static var end_arque: luxe.Sprite;
 	public static var end_reset: luxe.Sprite;
 
 	var azur: entity.Azur; // Left fighter
@@ -61,6 +62,7 @@ class Play extends State {
         lastDeath = 0;
         arqueAchieved = false;
         matchResolved = false;
+        readyToReset = false;
 
 		setupWorld();
 		chooseColors();
@@ -196,7 +198,8 @@ class Play extends State {
 			if (!matchResolved) {
 				// if (Main.state.enabled('end')) Main.state.disable('end'); // dirty hack/ workaround
 				// Main.state.enable('end', {azurwins: false, arque: arqueAchieved});
-				end_winner.text = 'odeo wins!';
+				// end_winner.text = 'odeo wins!';
+				end_winner.color = p2c;
 				MatchEnding();
 			}
 		});
@@ -205,7 +208,8 @@ class Play extends State {
 			if (!matchResolved) {
 				// if (Main.state.enabled('end')) Main.state.disable('end');
 				// Main.state.enable('end', {azurwins: true, arque: arqueAchieved});
-				end_winner.text = 'azur wins!';
+				// end_winner.text = 'azur wins!';
+				end_winner.color = p1c;
 				MatchEnding();
 			}
 		});
@@ -219,19 +223,27 @@ class Play extends State {
 	function MatchEnding() {
 		CheckForDraw(); // if the other is already dead within the timeframe, 'draw' text is drawn
 		end_winner.visible = true; // reveal the result text
-		if (arqueAchieved) end_arque.visible = true;
 
-		lastDeath = Luxe.time; // assign the time of death for detection of draw (two deaths within C.draw_allowance)
-		Luxe.timer.schedule(C.draw_allowance, function(){ // conclude the match and allow restart
-			matchResolved = true;
-			end_reset.visible = true; // reveal the restart button
+		if (arqueAchieved) Luxe.timer.schedule(2, function(){ // reveal the arque emblem in 2 sec with a stimulating sound effect
+			end_arque.visible = true;
+			// TODO Luxe.audio.play('pa_arque');
+		});
+
+		lastDeath = Luxe.time; // record the time of death for detection of draw (two deaths within C.draw_allowance)
+		Luxe.timer.schedule(C.draw_allowance, function(){ 
+			matchResolved = true; // conclude the match
+			Luxe.timer.schedule(1, function(){
+				end_reset.color.tween(0.5, {a: 1}).onComplete(function(){readyToReset = true;}); // fade-in the button and allow reset once tweening completed
+			}); // timer within a timer, reveal the restart button one sec afterwards
 		});
 	}
 
 	function CheckForDraw() {
 		if (lastDeath != 0 && (Luxe.time - lastDeath) < C.draw_allowance) {
 			// Luxe.events.fire('end.draw');
-			end_winner.text = 'draw';
+			// end_winner.text = 'draw';
+			end_winner.texture = Luxe.resources.texture('assets/banner_draw.png');
+			end_winner.color = new Color();
 		}
 	}
 
@@ -295,46 +307,65 @@ class Play extends State {
 	function setupResultScreen() {
 		end_scene = new luxe.Scene('endScene');
 
-		end_winner = new Text ({
-			name: 'r.winner',
-			// name_unique: true, // [workaround/dirty hack] to prevent this from being trapped in limbo with another of the same name, since many will be created in one session
+		end_winner = new Sprite({
+			name: 'r.winner', // r for result
 			pos: new Vector(Main.w * 0.5, Main.h * 0.2),
-			text: 'result',
-			align: center,
-			align_vertical: center,
-			point_size: 96,
 			visible: false,
-			// visible: true,
+			texture: Luxe.resources.texture('assets/banner_wins.png'),
 			scene: end_scene,
 		});
 
-		end_arque = new Text ({
+		end_arque = new Sprite({
 			name: 'r.arque',
-			// name_unique: true,
 			pos: new Vector(Main.w * 0.5, Main.h * 0.4),
-			text: 'arque!',
-			align: center,
-			align_vertical: center,
-			point_size: 96,
 			visible: false,
-			// visible: true,
+			texture: Luxe.resources.texture('assets/banner_arque.png'),
 			scene: end_scene,
 		});
+
+		// end_winner = new Text ({
+		// 	name: 'r.winner',
+		// 	// name_unique: true, // [workaround/dirty hack] to prevent this from being trapped in limbo with another of the same name, since many will be created in one session
+		// 	pos: new Vector(Main.w * 0.5, Main.h * 0.2),
+		// 	text: 'result',
+		// 	align: center,
+		// 	align_vertical: center,
+		// 	point_size: 96,
+		// 	visible: false,
+		// 	// visible: true,
+		// 	scene: end_scene,
+		// });
+
+		// end_arque = new Text ({
+		// 	name: 'r.arque',
+		// 	// name_unique: true,
+		// 	pos: new Vector(Main.w * 0.5, Main.h * 0.4),
+		// 	text: 'arque!',
+		// 	align: center,
+		// 	align_vertical: center,
+		// 	point_size: 96,
+		// 	visible: false,
+		// 	// visible: true,
+		// 	scene: end_scene,
+		// });
 
 		end_reset = new Sprite ({
 			name: 'b.reset',
 			// name_unique: true,
 			pos: new Vector (Main.w * 0.5, Main.h * 0.7),
 			size: new Vector (128, 128),
-			visible: false,
+			// visible: false,
 			// visible: true,
+			// color: new Color()
 			scene: end_scene,
 			texture: Luxe.resources.texture('assets/button_reset.png'),
 		});
+		end_reset.color.a = 0;
 	}
 
 	override public function onmousedown(e: MouseEvent) {
 		if (!matchResolved) return;
+		if (!readyToReset) return;
 		if (end_reset.point_inside(Luxe.camera.screen_point_to_world(e.pos))) {
 			Main.state.set('play');
 		}
