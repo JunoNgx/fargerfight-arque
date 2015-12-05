@@ -43,4 +43,9 @@ class C {
 	public static var body_shield: Array<nape.geom.Vec2> = Polygon.box( 12, 66);
 	public static var body_arquen: Array<nape.geom.Vec2> = Polygon.regular(10, 10, 8); // A polygon with high amount of vertex to simulate a circle, for simplicity's sake
 
+	// Other graphic values
+	public static var cText: luxe.Color = new luxe.Color().rgb(0x222222);
+	public static var cShard: luxe.Color = new luxe.Color().rgb(0x333333);
+	public static var cSpark: luxe.Color = new luxe.Color().rgb(0x666666);
+
 }

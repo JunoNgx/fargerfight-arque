@@ -31,8 +31,8 @@ class Explosion extends PartBase {
 			end_speed: 0,
 			speed_random: 0,
 
-			start_color: new Color(1,1,1),
-			end_color: new Color(1,1,1,1),
+			start_color: C.cShard,
+			end_color: C.cShard,
 
 			start_size: new Vector(64, 64),
 			start_size_random: new Vector(0,0),

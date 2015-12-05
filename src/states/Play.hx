@@ -43,7 +43,7 @@ class Play extends State {
 	public static var end_scene: luxe.Scene;
 	public static var end_winner: luxe.Text;
 	public static var end_arque: luxe.Text;
-	public static var end_replay: luxe.Sprite;
+	public static var end_reset: luxe.Sprite;
 
 	var azur: entity.Azur; // Left fighter
 	var odeo: entity.Odeo; // Right fighter
@@ -206,7 +206,7 @@ class Play extends State {
 		lastDeath = Luxe.time; // assign the time of death for detection of draw (two deaths within C.draw_allowance)
 		Luxe.timer.schedule(C.draw_allowance, function(){ // conclude the match and allow restart
 			matchResolved = true;
-			end_replay.visible = true; // reveal the restart button
+			end_reset.visible = true; // reveal the restart button
 		});
 	}
 
@@ -217,16 +217,17 @@ class Play extends State {
 		}
 	}
 
-	override public function update(dt: Float) {
-		Luxe.draw.text({
-			text: '${matchResolved}',
-			pos: new Vector(20, 20),
-			point_size: 48,
-			immediate: true,
-			depth: 20,
-			color: new Color().rgb(0xdddddd),
-		});
-	}
+	// // #debug
+	// override public function update(dt: Float) {
+	// 	Luxe.draw.text({
+	// 		text: '${matchResolved}',
+	// 		pos: new Vector(20, 20),
+	// 		point_size: 48,
+	// 		immediate: true,
+	// 		depth: 20,
+	// 		color: new Color().rgb(0xdddddd),
+	// 	});
+	// }
 
 	override public function onleave<T> (_:T) {
 		Luxe.scene.empty();
@@ -302,20 +303,21 @@ class Play extends State {
 			scene: end_scene,
 		});
 
-		end_replay = new Sprite ({
-			name: 'b.replay',
+		end_reset = new Sprite ({
+			name: 'b.reset',
 			// name_unique: true,
 			pos: new Vector (Main.w * 0.5, Main.h * 0.7),
 			size: new Vector (128, 128),
 			visible: false,
 			// visible: true,
 			scene: end_scene,
+			texture: Luxe.resources.texture('assets/button_reset.png'),
 		});
 	}
 
 	override public function onmousedown(e: MouseEvent) {
 		if (!matchResolved) return;
-		if (end_replay.point_inside(Luxe.camera.screen_point_to_world(e.pos))) {
+		if (end_reset.point_inside(Luxe.camera.screen_point_to_world(e.pos))) {
 			Main.state.set('play');
 		}
 	}

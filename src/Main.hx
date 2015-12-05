@@ -6,6 +6,7 @@ import luxe.Color;
 import luxe.Camera;
 
 import luxe.States;
+import phoenix.BitmapFont;
 
 class Main extends luxe.Game {
 
@@ -17,6 +18,8 @@ class Main extends luxe.Game {
 
 	public static var state: States;
 	public static var farglib: Array<Color>;
+
+	public static var raleway32: BitmapFont;
 
 	override function config(config:luxe.AppConfig):luxe.AppConfig {
 
@@ -31,6 +34,13 @@ class Main extends luxe.Game {
 
 		config.preload.textures = [
 			{id: 'assets/logo_box.png'},
+			{id: 'assets/arque_title.png'},
+			{id: 'assets/button_play.png'},
+			{id: 'assets/button_reset.png'},
+			{id: 'assets/banner_wins.png'},
+			{id: 'assets/banner_draw.png'},
+			{id: 'assets/arque_achieved.png'},
+
 			{id: 'assets/farger_entity.png'},
 			{id: 'assets/farger_phys.png'},
 			{id: 'assets/armlet_rt.png'},
@@ -39,6 +49,8 @@ class Main extends luxe.Game {
 			{id: 'assets/arquen.png'},
 			{id: 'assets/shard.png'},
 		];
+
+		config.preload.fonts.push({id: 'assets/raleway32.fnt'});
 
 		return config;
 	}
@@ -53,6 +65,8 @@ class Main extends luxe.Game {
 		Luxe.camera.size_mode = SizeMode.fit;
 
 		Luxe.renderer.clear_color = new Color().rgb(0xeeeeee);
+		
+		raleway32 = Luxe.resources.font('assets/raleway32.fnt');
 
 		state = new States( { name: "states" } );
 
@@ -76,6 +90,7 @@ class Main extends luxe.Game {
 			new Color().rgb(0xF8DE7E), // jasmine
 			new Color().rgb(0xE52B50), // amaranth
 		];
+
 
 		// setupEvents();
 	}

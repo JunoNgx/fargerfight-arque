@@ -29,8 +29,8 @@ class Spark extends PartBase {
 			end_speed: 10,
 			speed_random: 0,
 
-			start_color: new Color(1,1,1),
-			end_color: new Color(1,1,1,1),
+			start_color: C.cSpark,
+			end_color: C.cSpark,
 
 			start_size: new Vector(12, 12),
 			start_size_random: new Vector(0,0),

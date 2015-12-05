@@ -13,35 +13,46 @@ import C;
 
 class Menu extends State {
 
-	var title: Text;
+	// var title: Text;
+	var title: Sprite;
 	var playButton: Sprite;
 	var instruction: Text;
 	var copyright: Text;
 
 	override public function onenabled <T> (_:T) {
-		title = new Text({
+		// title = new Text({
+		// 	name: 't.title',
+		// 	name_unique: true,
+		// 	text: 'Fargerfight Arque',
+		// 	pos: new Vector(Main.w * 0.5, Main.h * 0.1),
+		// 	point_size: 128,
+		// 	align: center,
+		// });
+
+		title = new Sprite({
 			name: 't.title',
-			name_unique: true,
-			text: 'Fargerfight Arque',
-			pos: new Vector(Main.w * 0.5, Main.h * 0.1),
-			point_size: 128,
-			align: center
+			// name_unique: true,
+			pos: new Vector(Main.w * 0.5, Main.h * 0.2),
+			texture: Luxe.resources.texture('assets/arque_title.png'),
 		});
 
 		playButton = new Sprite ({
 			name: 'b.play',
-			name_unique: true,
+			// name_unique: true,
 			size: new Vector (128, 128),
 			pos: new Vector (Main.w * 0.5, Main.h * 0.5),
+			texture: Luxe.resources.texture('assets/button_play.png'),
 		});
 
 		instruction = new Text({
 			name: 't.instruction',
-			name_unique: true,
+			// name_unique: true,
 			text: 'on each half of the screen \n swipe to move // double tap to fire',
 			pos: new Vector(Main.w * 0.5, Main.h * 0.7),
-			// point_size: 128,
-			align: center
+			point_size: 32,
+			align: center,
+			font: Main.raleway32,
+			color: C.cText,
 		});
 
 		copyright = new Text({
@@ -50,7 +61,9 @@ class Menu extends State {
 			text: '2016 Aureoline Tetrahedron',
 			pos: new Vector(Main.w * 0.5, Main.h * 0.9),
 			// point_size: 128,
-			align: center
+			align: center,
+			font: Main.raleway32,
+			color: C.cText,
 		});
 	}
 
