@@ -53,6 +53,7 @@ class Play extends State {
 	public static var esc: luxe.Color;
 
 	override public function onenter<T> (_:T) {
+		// DebugArea, enable the below line to view collision bodies
 		// drawer = new DebugDraw();
 		debugText = new luxe.Text({name: 'debug', pos: new Vector(200, 20)});
         Luxe.physics.nape.debugdraw = drawer;

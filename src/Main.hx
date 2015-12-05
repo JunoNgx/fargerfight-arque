@@ -85,8 +85,8 @@ class Main extends luxe.Game {
 
 		state.add (new states.Play({name: 'play'}));
 		state.add (new states.Menu({name: 'menu'}));
-		state.add (new states.End({name: 'end'}));
-		state.add (new states.Splash({name: 'splash'}));
+		// state.add (new states.End({name: 'end'}));
+		// state.add (new states.Splash({name: 'splash'}));
 
 		state.set(initialState);
 		state.enable('menu');
