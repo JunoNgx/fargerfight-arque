@@ -48,5 +48,7 @@ class C {
 	public static var cShard: luxe.Color = new luxe.Color().rgb(0x333333);
 	public static var cSpark: luxe.Color = new luxe.Color().rgb(0x666666);
 	public static var back_variance: Float = 70;
+	public static var indicator_radius: Float = 8;
+	public static var indicator_size: Float = 8;
 
 }

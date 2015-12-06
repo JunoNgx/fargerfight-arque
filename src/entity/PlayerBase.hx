@@ -13,7 +13,7 @@ import C;
 
 class PlayerBase extends Sprite {
 
-	public var hp: Int = 3;
+	public var hp: Int = 4;
 	public var alive: Bool = true;
 
 	public var phys: component.FargerPhys;
@@ -168,15 +168,15 @@ class PlayerBase extends Sprite {
 
 
 		// DebugArea
-		Luxe.draw.text({
-			text: '${hp}',
-			pos: new Vector(this.pos.x, this.pos.y - 64),
-			point_size: 48,
-			align: right,
-			immediate: true,
-			depth: 20,
-			color: new Color().rgb(0xdddddd),
-		});
+		// Luxe.draw.text({
+		// 	text: '${hp}',
+		// 	pos: new Vector(this.pos.x, this.pos.y - 64),
+		// 	point_size: 48,
+		// 	align: right,
+		// 	immediate: true,
+		// 	depth: 20,
+		// 	color: new Color().rgb(0xdddddd),
+		// });
 
 		// Luxe.draw.ngon({
 		// 	pos: this.barrel,

@@ -79,6 +79,9 @@ class Odeo extends PlayerBase {
 
 		// entity-specific controller
 		this.add(new component.touchcontrol.Right());
+		
+		// hp indicator
+		this.add(new component.Indicator({name: 'indicator'}));
 
 		super.init();
 	}

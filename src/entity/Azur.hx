@@ -83,6 +83,9 @@ class Azur extends PlayerBase {
 		// entity-specific controller
 		this.add(new component.touchcontrol.Left());
 
+		// hp indicator
+		this.add(new component.Indicator({name: 'indicator'}));
+
 		super.init(); // Assign properties and joinEquipments()
 	}
 }
