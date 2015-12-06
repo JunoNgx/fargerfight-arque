@@ -36,6 +36,7 @@ class Main extends luxe.Game {
 			{id: 'assets/logo_luxe.png'},
 			{id: 'assets/logo_aureotetra.png'},
 
+			{id: 'assets/backgroundtile.png'},
 			{id: 'assets/arque_title.png'},
 			{id: 'assets/button_play.png'},
 			{id: 'assets/button_reset.png'},

@@ -59,6 +59,17 @@ class Play extends State {
 		debugText = new luxe.Text({name: 'debug', pos: new Vector(200, 20)});
         Luxe.physics.nape.debugdraw = drawer;
 
+        // adjust background image
+        var tilescale = Luxe.utils.random.float(0.5, 1.5);
+        var backgroundtile = new Sprite({
+        	name: 'backgroundtile',
+        	texture: Luxe.resources.texture('assets/backgroundtile.png'),
+        	pos: new Vector(Main.w * 0.5 + Luxe.utils.random.float(-C.back_variance, C.back_variance), Main.h * 0.5 + Luxe.utils.random.float(-C.back_variance, C.back_variance)),
+        	scale: new Vector(tilescale, tilescale),
+        	rotation_z: Luxe.utils.random.float(-360, 360),
+        	depth: -20 // bottomost,
+    	});
+
         lastDeath = 0;
         arqueAchieved = false;
         matchResolved = false;

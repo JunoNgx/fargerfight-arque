@@ -47,5 +47,6 @@ class C {
 	public static var cText: luxe.Color = new luxe.Color().rgb(0x222222);
 	public static var cShard: luxe.Color = new luxe.Color().rgb(0x333333);
 	public static var cSpark: luxe.Color = new luxe.Color().rgb(0x666666);
+	public static var back_variance: Float = 70;
 
 }
