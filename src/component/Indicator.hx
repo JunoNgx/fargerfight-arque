@@ -20,11 +20,11 @@ class Indicator extends Component {
 
 		var host: Sprite = cast entity;
 
-		for (i in 0...4) { // TODO why doesn't 3 work?
+		for (i in 0...4) {
+		// Explanation from official manual: for (i in 0...10) trace(i); // 0 to 9
 			hi[i] = new Sprite({
 				name_unique: true,
 				pos: new Vector (host.pos.x + C.indicator_radius * Math.cos(host.radians + Math.PI/2 * i), host.pos.y + C.indicator_radius * Math.sin(host.radians + Math.PI/2 * i)),
-				// radians: host.radians + Math.PI/4,
 				size: new Vector(C.indicator_size, C.indicator_size)
 			});
 		}
