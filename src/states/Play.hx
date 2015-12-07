@@ -103,7 +103,6 @@ class Play extends State {
 		if(states.Play.drawer != null) drawer.add(borders);
 
 		spawnCovers();
-
 	}
 
 	function chooseColors() {
@@ -237,7 +236,7 @@ class Play extends State {
 
 		if (arqueAchieved) Luxe.timer.schedule(2, function(){ // reveal the arque emblem in 2 sec with a stimulating sound effect
 			end_arque.visible = true;
-			// TODO Luxe.audio.play('pa_arque');
+			Luxe.audio.play('arque_pa');
 		});
 
 		lastDeath = Luxe.time; // record the time of death for detection of draw (two deaths within C.draw_allowance)
@@ -254,8 +253,8 @@ class Play extends State {
 			// Luxe.events.fire('end.draw');
 			// end_winner.text = 'draw';
 			end_winner.texture = Luxe.resources.texture('assets/banner_draw.png');
-			end_winner.color = new Color();
-			end_winner.size = new Vector(256, 128);
+			// end_winner.color = new Color();
+			// end_winner.size = new Vector(256, 128);
 		}
 	}
 

@@ -42,6 +42,7 @@ class ArmBase extends Component {
 
 	public var body: Body;
 	public var hitShardListener: InteractionListener;
+	public var hitBorderListener: InteractionListener;
 
 	public var gfx: Sprite;
 
@@ -63,6 +64,8 @@ class ArmBase extends Component {
 		body.rotation = _options.rot;
 		if (_options.cbType != null) body.cbTypes.add( _options.cbType );
 		
+		body.cbTypes.add(PhysTypes.armbase);
+
 		// Graphics
 		gfx = new Sprite({
 			name:'gfx',
@@ -84,11 +87,29 @@ class ArmBase extends Component {
 			hitShard
 		);
 		Luxe.physics.nape.space.listeners.add(hitShardListener);
+
+		hitBorderListener = new InteractionListener( CbEvent.BEGIN, InteractionType.COLLISION,
+			PhysTypes.armbase,
+			PhysTypes.border,
+			hitBorder
+		);
+		Luxe.physics.nape.space.listeners.add(hitBorderListener);
 	}
 
 	override function update(dt: Float) {
 		gfx.pos = new luxe.Vector(this.body.position.x, this.body.position.y);
 		gfx.radians = this.body.rotation;
+	}
+
+	function hitBorder(callback: InteractionCallback) {
+		if(callback.int1.castBody.id == body.id) {
+			var rando = Luxe.utils.random.int(1,4);
+			switch rando {
+				case 1: Luxe.audio.play('border_armbase1');
+				case 2: Luxe.audio.play('border_armbase2');
+				case 3: Luxe.audio.play('border_armbase3');
+			}
+		}
 	}
 
 	@:noCompletion public function hitShard( callback: InteractionCallback ) {}

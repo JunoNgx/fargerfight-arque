@@ -90,7 +90,15 @@ class ShardPhys extends Component {
 	}
 
 	function hitBorder(callback: InteractionCallback) {
-		// Luxe.audio.play('hitborder');
+		if(callback.int1.castBody.id == body.id) {
+			var rando = Luxe.utils.random.int(1,5);
+			switch rando {
+				case 1: Luxe.audio.play('border_shard1');
+				case 2: Luxe.audio.play('border_shard2');
+				case 3: Luxe.audio.play('border_shard3');
+				case 4: Luxe.audio.play('border_shard4');
+			}
+		}
 	}
 
 	function hostDestroy() {

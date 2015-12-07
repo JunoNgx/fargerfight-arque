@@ -18,7 +18,9 @@ class FargerPhys extends ArmBase {
 			var host: entity.PlayerBase = cast entity;
 			host.hp -= 1;
 
-			trace('lost 1 hp');
+			Luxe.audio.play('hit_impact');
+
+			// trace('lost 1 hp');
 
 			// Push the fighter away when hit for enhanced feedback
 			var angle: Float = Math.atan2(
@@ -31,11 +33,13 @@ class FargerPhys extends ArmBase {
 			// BUG: very random direction of force
 
 			Luxe.timescale = 0.001; // Simulate the termporarily paused game effect by setting Luxe.timescale to a near zero
-			trace('timescale semi-frozen'); 
+			// trace('timescale semi-frozen'); 
 
 			Luxe.timer.schedule(0.5, function(){ // Restore timescale in 0.5 seconds
 				Luxe.timescale = 1;
-				trace('timescale restored');
+				// trace('timescale restored');
+
+				Luxe.audio.play('hit_notif');
 
 				// Splash essence base the other body ```callback.int2``` and ```angle``` being calculated above
 				Luxe.events.fire('effect.essence.splash', {pos: new Vector(this.body.position.x, this.body.position.y), direction: -angle});

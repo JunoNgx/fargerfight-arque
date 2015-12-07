@@ -25,6 +25,7 @@ class Arquen extends ArmBase {
 			Luxe.events.fire('arque!');
 			trace('arque!');
 
+			Luxe.audio.play('arque_impact');
 			Luxe.camera.shake(80);
 		}
 	}

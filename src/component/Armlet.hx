@@ -23,6 +23,8 @@ class Armlet extends ArmBase {
 				entity.events.fire('detach.joint_rt');
 			}
 
+			Luxe.audio.play('hit_armlet');
+
 			Luxe.events.fire('effect.spark', {pos: new Vector(this.body.position.x, this.body.position.y)});
 
 			// // Feedback for detachment of armlet from farger

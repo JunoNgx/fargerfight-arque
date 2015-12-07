@@ -53,6 +53,8 @@ class PlayerBase extends Sprite {
 			Luxe.timescale = 0.001; // Simulate the termporarily paused game effect by setting Luxe.timescale to a near zero
 			trace('timescale semi-frozen'); 
 
+			Luxe.audio.play('hit_die');	
+
 			this.alive = false;
 			this.hp = 0;
 
@@ -162,7 +164,7 @@ class PlayerBase extends Sprite {
 		if (this.fire_cooldown < C.fire_cooldown) this.fire_cooldown += dt;
 
 		if (this.alive && this.hp == 0) {
-			this.events.fire('die');		
+			this.events.fire('die');	
 			Luxe.camera.shake(50);
 		}
 
@@ -192,6 +194,8 @@ class PlayerBase extends Sprite {
 
 		// Check if already cooldowned and ready to fire
 		if (this.fire_cooldown >= C.fire_cooldown) {
+			Luxe.audio.play('fire');
+
 			var shard = new entity.Shard('azur', this.barrel.x, this.barrel.y, this.radians);
 			this.fire_cooldown = 0;
 		} else {

@@ -93,7 +93,33 @@ class Main extends luxe.Game {
 
 		state.set(initialState);
 		state.enable('menu');
-		
+
+		setupAudio();
+	}
+
+	function setupAudio() {
+		Luxe.audio.create('assets/arque_pa.ogg', 'arque_pa');
+		Luxe.audio.create('assets/arque_impact.ogg', 'arque_impact');
+		Luxe.audio.create('assets/fire.ogg', 'fire');
+
+		// shard hitting armlet
+		Luxe.audio.create('assets/hit_armlet.ogg', 'hit_armlet');
+
+		// shard hitting main body
+		Luxe.audio.create('assets/hit_impact.ogg', 'hit_impact');
+		Luxe.audio.create('assets/hit_notif.ogg', 'hit_notif');
+		Luxe.audio.create('assets/hit_die.ogg', 'hit_die');
+
+		// the impact between the walls and shards
+		Luxe.audio.create('assets/border_shard1.ogg', 'border_shard1');
+		Luxe.audio.create('assets/border_shard2.ogg', 'border_shard2');
+		Luxe.audio.create('assets/border_shard3.ogg', 'border_shard3');
+		Luxe.audio.create('assets/border_shard4.ogg', 'border_shard4');
+
+		// the impact between the walls and body parts
+		Luxe.audio.create('assets/border_armbase1.ogg', 'border_armbase1');
+		Luxe.audio.create('assets/border_armbase2.ogg', 'border_armbase2');
+		Luxe.audio.create('assets/border_armbase3.ogg', 'border_armbase3');
 	}
 
 }
