@@ -24,9 +24,13 @@
                 android: {
                     sdk_min: '12',
                     sdk_target: '19'
+                },
+                ios: {
+                    devices: 'iPhone',
+                    deployment_target: '8.0',
                 }
             },
-            icon : "icons => flow"
+            icon : "icons => arque"
         },
 
         build : {
@@ -65,4 +69,12 @@
             }
         }
     },
+
+    if: {
+        ios: {
+            build: {
+                defines: ['no_debug_console']
+            }
+        }
+    }
 }

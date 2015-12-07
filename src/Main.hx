@@ -32,6 +32,11 @@ class Main extends luxe.Game {
             }
         }
 
+		#if ios
+			config.window.fullscreen = true;
+			config.window.borderless = true;
+		#end
+
 		config.preload.textures = [
 			{id: 'assets/logo_luxe.png'},
 			{id: 'assets/logo_aureotetra.png'},
