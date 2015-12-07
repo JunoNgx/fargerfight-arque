@@ -18,6 +18,7 @@ class Menu extends State {
 	var playButton: Sprite;
 	var instruction: Text;
 	var copyright: Text;
+	var twitter: Text;
 
 	var luxe: Sprite;
 	var aureotetra: Sprite;
@@ -69,6 +70,17 @@ class Menu extends State {
 			color: C.cText,
 		});
 
+		twitter = new Text({
+			name: 't.twitter',
+			name_unique: true,
+			text: '@JunoNgx',
+			pos: new Vector(0, Main.h - 24),
+			align: left,
+			point_size: 24,
+			font: Main.raleway32,
+			color: C.cText,
+		});
+
 		luxe = new Sprite({
 			name: 'luxelogo',
 			name_unique: true,
@@ -91,6 +103,7 @@ class Menu extends State {
 		playButton.destroy();
 		instruction.destroy();
 		copyright.destroy();
+		twitter.destroy();
 
 		luxe.destroy();
 		aureotetra.destroy();
