@@ -42,8 +42,8 @@
                 nape : '*'
             },
             files: {
-                keystore_things : 'passwords.sensitive.properties => project/passwords.sensitive.properties',
-                copying: 'Aureoline_Tetrahedron.keystore => project/Aureoline_Tetrahedron.keystore'
+                keystore: 'Aureoline_Tetrahedron.keystore => project/Aureoline_Tetrahedron.keystore',
+                passwords : 'passwords.sensitive.properties => project/passwords.sensitive.properties'
             },
         },
 
