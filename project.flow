@@ -42,7 +42,8 @@
                 nape : '*'
             },
             files: {
-                keystore_things : 'passwords.sensitive.properties => project/passwords.sensitive.properties'
+                keystore_things : 'passwords.sensitive.properties => project/passwords.sensitive.properties',
+                copying: 'Aureoline_Tetrahedron.keystore => project/Aureoline_Tetrahedron.keystore'
             },
         },
 
@@ -58,8 +59,8 @@
                 mobile: {
                     android: {
                         build_type: "release",
-                        keystore_path: "indiedev.keystore",
-                        keystore_alias: "indiedev"
+                        keystore_path: "Aureoline_Tetrahedron.keystore",
+                        keystore_alias: "Aureoline_Tetrahedron"
                     }
                 }
             },
@@ -67,10 +68,8 @@
             build: {
                 defines: ['no_debug_console']
             }
-        }
-    },
+        },
 
-    if: {
         ios: {
             build: {
                 defines: ['no_debug_console']
