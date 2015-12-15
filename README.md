@@ -46,6 +46,8 @@ Forces will be applied to physic bodies upon hit to enhance feedback towards pla
 
 * **Particles**: `particle.*`, self-explanatory.
 
+* **Constants**: `C`, list of values that require intense tuning that might majorly affect the game. For convenience.
+
 ## Debug mode
 
 To enable physic debug mode and view the collision shapes in real-time, uncomment the line `states.Play:58` : 
