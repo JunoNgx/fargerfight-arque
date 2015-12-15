@@ -27,10 +27,9 @@ class FargerPhys extends ArmBase {
 				callback.int1.castBody.position.y - callback.int2.castBody.position.y,
 				callback.int1.castBody.position.x - callback.int2.castBody.position.x
 			);
+			// BUG: very random direction of force
 			var force:Float = 2000;
 			body.applyImpulse(new Vec2(force * Math.cos(angle), force * Math.sin(angle)), body.position);
-
-			// BUG: very random direction of force
 
 			Luxe.timescale = 0.001; // Simulate the termporarily paused game effect by setting Luxe.timescale to a near zero
 			// trace('timescale semi-frozen'); 
