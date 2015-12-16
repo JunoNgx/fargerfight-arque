@@ -70,6 +70,6 @@ Codes are highly commented for instructive, collaborative, and self-reminding pu
 
 The actual development process is here. Every commit is actual progress development, entirely in public and hidden in plain sight. Just doing this for fun :D
 
-Would appreciate suggestions (especially about that rotation when moving thingy).
+If you have already read this far, then I would deeply appreciate improvement suggestions (especially about that rotation when moving thingy). I'm going to need them.
 
-Please feel free to fork. I'm looking forward to them :D
+Also, please feel free to fork and release your own versions of this game. I'm looking forward to them :D
