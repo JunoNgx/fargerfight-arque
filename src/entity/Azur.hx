@@ -16,7 +16,6 @@ class Azur extends PlayerBase {
 	override public function new(_c: Color) {
 		super({
 			name: 'azur',
-			// debug only
 			depth: -2,
 			texture: Luxe.resources.texture('assets/farger_entity.png'),
 			color: _c,

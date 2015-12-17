@@ -64,12 +64,12 @@ To enable physic debug mode and view the collision shapes in real-time, uncommen
 
 ## Final notes
 
-Development period: Aug - Dec 2015 (approximately 3.5 months).
+Development period: Aug - Dec 2015 (approximately 3.5 months). Hampered mainly by, but not limited to, StarCraft, Metal Gear Solid and Real Life.
 
 Codes are highly commented for instructive, collaborative, and self-reminding purposes.
 
-The actual development process is here. Every commit is actual progress development, entirely in public and hidden in plain sight. Just doing this for fun :D
+The actual development process is here. Every commit is actual progress, made of smiles and sweat and sleeplessness, entirely in public and hidden in plain sight. Just doing this for fun :D
 
-If you have already read this far, then I would deeply appreciate improvement suggestions (especially about that rotation when moving thingy). I'm going to need them.
+If you have already read this far, then I would deeply appreciate improvement suggestions (note that rotation when moving thingy). Especially code critiques. I'm going to need them.
 
 Also, please feel free to fork and release your own versions of this game. I'm looking forward to them :D

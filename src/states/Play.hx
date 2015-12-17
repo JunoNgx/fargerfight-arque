@@ -175,7 +175,6 @@ class Play extends State {
 				// All to determine the randomized position of the essence drop
 				// nape.phys.body.rotation is already in radian
 				var newdirection = _e.direction + Luxe.utils.random.float(-C.essence_direction_variance, C.essence_direction_variance);
-				// var radian = newdirection * Math.PI / 180;
 				var newpos = new Vector(
 					_e.pos.x + C.essence_splash_dist_figure * Math.cos(newdirection) * stat,
 					_e.pos.y + C.essence_splash_dist_figure * Math.sin(newdirection) * stat
@@ -206,9 +205,6 @@ class Play extends State {
 		// Ending
 		Luxe.events.listen('azur.died', function(e){
 			if (!matchResolved) {
-				// if (Main.state.enabled('end')) Main.state.disable('end'); // dirty hack/ workaround
-				// Main.state.enable('end', {azurwins: false, arque: arqueAchieved});
-				// end_winner.text = 'odeo wins!';
 				end_winner.color = p2c;
 				MatchEnding();
 			}
@@ -216,9 +212,6 @@ class Play extends State {
 
 		Luxe.events.listen('odeo.died', function(e){
 			if (!matchResolved) {
-				// if (Main.state.enabled('end')) Main.state.disable('end');
-				// Main.state.enable('end', {azurwins: true, arque: arqueAchieved});
-				// end_winner.text = 'azur wins!';
 				end_winner.color = p1c;
 				MatchEnding();
 			}
@@ -250,11 +243,7 @@ class Play extends State {
 
 	function CheckForDraw() {
 		if (lastDeath != 0 && (Luxe.time - lastDeath) < C.draw_allowance) {
-			// Luxe.events.fire('end.draw');
-			// end_winner.text = 'draw';
 			end_winner.texture = Luxe.resources.texture('assets/banner_draw.png');
-			// end_winner.color = new Color();
-			// end_winner.size = new Vector(256, 128);
 		}
 	}
 
@@ -278,31 +267,6 @@ class Play extends State {
 
 		Luxe.events.clear();
 	}
-
-	// #DebugArea
-	// override public function onmousemove(e: MouseEvent) {
-
-	// 	// var desRot = Math.atan2(e.yrel * 100, e.xrel * 100);
-	// 	// var desRot = Math.atan2(azur.physic.body.velocity.y, azur.physic.body.velocity.x);
-	// 	// Luxe.draw.text({
-	// 	// 	text: '${desRot}',
-	// 	// 	pos: new Vector(200, 20),
-	// 	// 	point_size: 48,
-	// 	// 	align: right,
-	// 	// 	immediate: true,
-	// 	// });
-
-	// 	// debugText.text = Std.string(desRot);
-	// 	// debugText.text = Std.string(azur.physic.body.angularVel);
-	// 	// debugText.text = Std.string(azur.physic.body.rotation);
-	// }
-
-	// override public function onmousedown(e: MouseEvent) {
-	// 	// spark.flash(e.pos);
-	// 	// Luxe.events.fire('effect.spark', {pos: e.pos});
-	// 	// Luxe.events.fire('effect.explosion', {pos: e.pos});
-	// 	// Luxe.events.fire('effect.essence.drip', {pos: e.pos});
-	// }
 
 	override function onkeyup( e:KeyEvent ) {
 		if(e.keycode == Key.space) {
@@ -334,40 +298,10 @@ class Play extends State {
 			scene: end_scene,
 		});
 
-		// end_winner = new Text ({
-		// 	name: 'r.winner',
-		// 	// name_unique: true, // [workaround/dirty hack] to prevent this from being trapped in limbo with another of the same name, since many will be created in one session
-		// 	pos: new Vector(Main.w * 0.5, Main.h * 0.2),
-		// 	text: 'result',
-		// 	align: center,
-		// 	align_vertical: center,
-		// 	point_size: 96,
-		// 	visible: false,
-		// 	// visible: true,
-		// 	scene: end_scene,
-		// });
-
-		// end_arque = new Text ({
-		// 	name: 'r.arque',
-		// 	// name_unique: true,
-		// 	pos: new Vector(Main.w * 0.5, Main.h * 0.4),
-		// 	text: 'arque!',
-		// 	align: center,
-		// 	align_vertical: center,
-		// 	point_size: 96,
-		// 	visible: false,
-		// 	// visible: true,
-		// 	scene: end_scene,
-		// });
-
 		end_reset = new Sprite ({
 			name: 'b.reset',
-			// name_unique: true,
 			pos: new Vector (Main.w * 0.5, Main.h * 0.8),
 			size: new Vector (128, 128),
-			// visible: false,
-			// visible: true,
-			// color: new Color()
 			scene: end_scene,
 			texture: Luxe.resources.texture('assets/button_reset.png'),
 		});

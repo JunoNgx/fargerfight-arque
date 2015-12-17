@@ -51,7 +51,7 @@ class Shard extends Sprite {
 			lifetime += dt;
 		} else {
 			destroy();
-			// Luxe.audio.play('sharddestroy');
+			// TODO Luxe.audio.play('sharddestroy');
 			Luxe.events.fire('effect.explosion', {pos: this.pos});
 		} 
 	}

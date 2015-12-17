@@ -169,7 +169,7 @@ class PlayerBase extends Sprite {
 		}
 
 
-		// DebugArea
+		// #DebugArea
 		// Luxe.draw.text({
 		// 	text: '${hp}',
 		// 	pos: new Vector(this.pos.x, this.pos.y - 64),
@@ -199,7 +199,7 @@ class PlayerBase extends Sprite {
 			var shard = new entity.Shard('azur', this.barrel.x, this.barrel.y, this.radians);
 			this.fire_cooldown = 0;
 		} else {
-			// Luxe.audio.play('notreadytofire');
+			// TODO Luxe.audio.play('notreadytofire');
 		}
 		
 	}

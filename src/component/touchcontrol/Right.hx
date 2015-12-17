@@ -14,9 +14,9 @@ class Right extends Base {
 #if mobile
 
 	override public function ontouchdown(e: TouchEvent) {
-		if (e.x < 0.5) { // ignoring touches on the right side
+		if (e.x < 0.5) {
 			return;
-		} else super.ontouchdown(e); // if on left side (as desired), call the inherited super() method
+		} else super.ontouchdown(e);
 	}
 
 #else

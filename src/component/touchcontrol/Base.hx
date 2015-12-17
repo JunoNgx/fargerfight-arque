@@ -61,9 +61,7 @@ class Base extends Component {
 	// If you guys are able to make this work on PC then please go ahead!
 
 	override public function onmousedown(e: MouseEvent) {
-		// if (e.x < Main.w/2) isActive = true;
-
-		if (Main.state.enabled('menu')) return;
+		if (Main.state.enabled('menu')) return; // controller disabled when in menu
 
 		isActive = true;
 		if ((Luxe.time - lastPress) < 0.3) fire();

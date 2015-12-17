@@ -112,21 +112,5 @@ class ShardPhys extends Component {
 
 		var host: luxe.Visual = cast entity;
 		host.radians = this.body.rotation;
-		// collideWithCovers();
 	}
-
-	// function collideWithCovers() {
-	// 	// if (Geom.intersectsBody(this.body, states.Play.borders)) {
-	// 	for (ownShape in body.shapes) {
-	// 		for (covShape in states.Play.borders.shapes) {
-	// 			if (Geom.intersects(ownShape, covShape)) {
-	// 				trace('hit');
-	// 			}
-	// 		}
-	// 	}
-		
-	// 		// trace('hit');
-	// 	// }
-	// }
-
 }

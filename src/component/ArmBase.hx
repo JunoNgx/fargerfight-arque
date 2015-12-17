@@ -6,7 +6,6 @@ import luxe.options.ComponentOptions;
 import luxe.Sprite;
 
 import nape.phys.Body;
-// import nape.phys.Shape;
 import nape.phys.Material;
 import nape.phys.BodyType;
 import nape.shape.Polygon;
@@ -72,7 +71,6 @@ class ArmBase extends Component {
 			name_unique: true,
 			pos: new luxe.Vector(this.body.position.x, this.body.position.y),
 			rotation_z: this.body.rotation,
-			// size: new luxe.Vector(90, 90),
 			depth: -4,
 			texture: _options.texture,
 			color: _options.color,

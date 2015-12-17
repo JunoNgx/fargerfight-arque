@@ -13,7 +13,8 @@ class Shield extends ArmBase {
 	override function hitShard(callback: InteractionCallback) {
 
 		if(callback.int1.castBody.id == body.id) {
-			// TODO spark without anything else
+			// TODO shield spark without any major event
+			// TODO Luxe.sound.play('shield_spark');
 		}
 	}
 

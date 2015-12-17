@@ -13,7 +13,6 @@ import C;
 
 class Menu extends State {
 
-	// var title: Text;
 	var title: Sprite;
 	var playButton: Sprite;
 	var instruction: Text;
@@ -24,14 +23,6 @@ class Menu extends State {
 	var aureotetra: Sprite;
 
 	override public function onenabled <T> (_:T) {
-		// title = new Text({
-		// 	name: 't.title',
-		// 	name_unique: true,
-		// 	text: 'Fargerfight Arque',
-		// 	pos: new Vector(Main.w * 0.5, Main.h * 0.1),
-		// 	point_size: 128,
-		// 	align: center,
-		// });
 
 		title = new Sprite({
 			name: 't.title',
@@ -64,7 +55,6 @@ class Menu extends State {
 			name_unique: true,
 			text: '2016 Aureoline Tetrahedron',
 			pos: new Vector(Main.w * 0.5, Main.h * 0.9),
-			// point_size: 128,
 			align: center,
 			font: Main.raleway32,
 			color: C.cText,
